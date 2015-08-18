@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="queryrewriter" nsURI="http://www.eclipse.org/sirius/queryrewriter"
+    nsPrefix="queryrewriter">
+  <eClassifiers xsi:type="ecore:EClass" name="Configuration">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="paths" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="accessibleGroups" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.sirius/model/viewpoint.ecore#//description/Group"
+        transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rewrites" upperBound="-1"
+        eType="#//Rewrite" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="languagesToRewrite" upperBound="-1"
+        eType="#//QueryLanguage"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="autoFill" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Rewrite">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="old" eType="ecore:EDataType ../../org.eclipse.sirius/model/viewpoint.ecore#//description/InterpretedExpression"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="new" eType="ecore:EDataType ../../org.eclipse.sirius/model/viewpoint.ecore#//description/InterpretedExpression"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="occurrences" upperBound="-1"
+        eType="#//Occurrence" transient="true" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="underInspection" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Occurrence">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eattribute" eType="ecore:EClass ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EAttribute"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="vsmElement" eType="ecore:EClass ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="QueryLanguage">
+    <eLiterals name="UNKNOWN"/>
+    <eLiterals name="LEGACY" value="1"/>
+    <eLiterals name="MTL" value="2"/>
+    <eLiterals name="OCL" value="3"/>
+    <eLiterals name="AQL" value="4"/>
+    <eLiterals name="FEATURE" value="5"/>
+    <eLiterals name="VAR" value="6"/>
+    <eLiterals name="SERVICE" value="7"/>
+  </eClassifiers>
+</ecore:EPackage>

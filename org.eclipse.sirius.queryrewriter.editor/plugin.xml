@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated queryrewriter -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="org.eclipse.sirius.queryrewriter.presentation.QueryrewriterModelWizardID"
+            name="%_UI_QueryrewriterModelWizard_label"
+            class="org.eclipse.sirius.queryrewriter.presentation.QueryrewriterModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/QueryrewriterModelFile.gif">
+         <description>%_UI_QueryrewriterModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated queryrewriter -->
+      <editor
+            id="org.eclipse.sirius.queryrewriter.presentation.QueryrewriterEditorID"
+            name="%_UI_QueryrewriterEditor_label"
+            icon="icons/full/obj16/QueryrewriterModelFile.gif"
+            extensions="queryrewriter"
+            class="org.eclipse.sirius.queryrewriter.presentation.QueryrewriterEditor"
+            contributorClass="org.eclipse.sirius.queryrewriter.presentation.QueryrewriterActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>
