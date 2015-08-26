@@ -9,89 +9,320 @@
           <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
           <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
         </defaultStyle>
-        <subItemMappings name="Rewrite" domainClass="queryrewriter.Rewrite" semanticCandidatesExpression="feature:rewrites">
-          <defaultStyle labelSize="10" showIcon="false" labelExpression="[self.old + '->' + self.new +  ' (' + self.occurrences->size() + ')'/]">
-            <labelFormat>strike_through</labelFormat>
-            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+        <subItemMappings name="Rewrites" domainClass="queryrewriter.Configuration" semanticCandidatesExpression="var:self">
+          <defaultStyle labelExpression="aql:'TODO : ' + self.rewrites->select(r | not r.tested and not r.underInspection and r.occurrences->size() > 0)->size()">
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
           </defaultStyle>
-          <conditionalStyles predicateExpression="aql:not self.isValidAQL()">
-            <style labelSize="10" showIcon="false" labelExpression="[self.old + '->' + self.new +  ' (' + self.occurrences->size() + ')'/]">
-              <labelFormat>strike_through</labelFormat>
-              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='red']"/>
-              <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
-            </style>
-          </conditionalStyles>
-          <conditionalStyles predicateExpression="[self.occurrences->size() = 0/]">
-            <style labelSize="10" showIcon="false" labelExpression="[self.old + '(not found)'/]">
-              <labelFormat>strike_through</labelFormat>
-              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='orange']"/>
-              <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
-            </style>
-          </conditionalStyles>
-          <conditionalStyles predicateExpression="[self.new.oclIsUndefined() or self.new.size() =0/]">
-            <style labelSize="10" showIcon="false" labelExpression="aql:self.old + '-> ?' + self.rewriteProposal() +  '   (' + self.occurrences->size() + ')'">
-              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='purple']"/>
-              <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
-            </style>
-          </conditionalStyles>
-          <conditionalStyles predicateExpression="feature:underInspection">
-            <style labelSize="10" showIcon="false" labelExpression="[self.old + '->' + self.new +  ' (' + self.occurrences->size() + ')'/]">
-              <labelFormat>bold</labelFormat>
+          <subItemMappings name="Rewrite" domainClass="queryrewriter.Rewrite" semanticCandidatesExpression="aql:self.rewritesByOccurrences()->select(r | not r.tested and not r.underInspection and r.occurrences->size() > 0)">
+            <defaultStyle labelSize="10" showIcon="false" labelExpression="[self.old + '->' + self.new +  ' (' + self.occurrences->size() + ')'/]">
               <labelFormat>strike_through</labelFormat>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
               <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
-            </style>
-          </conditionalStyles>
-          <directEdit name="Pull the proposal" mapping="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='Rewrite']">
-            <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="var:self">
-              <subModelOperations xsi:type="tool:If" conditionExpression="[self.new.oclIsUndefined() or self.new = ''/]">
-                <subModelOperations xsi:type="tool:SetValue" featureName="new" valueExpression="aql:self.rewriteProposal()"/>
-              </subModelOperations>
-            </firstModelOperation>
-            <mask mask="{0}"/>
-            <element name="element"/>
-            <root name="root"/>
-          </directEdit>
-          <subItemMappings name="Occurrence" domainClass="queryrewriter.Occurrence" semanticCandidatesExpression="feature:occurrences">
-            <defaultStyle labelExpression="[self.eattribute.name/]">
-              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-              <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
             </defaultStyle>
-            <subItemMappings name="VSMElement" domainClass="EObject" semanticCandidatesExpression="feature:vsmElement">
-              <defaultStyle>
+            <conditionalStyles predicateExpression="aql:not self.isValidAQL()">
+              <style labelSize="10" showIcon="false" labelExpression="[self.old + '->' + self.new +  ' (' + self.occurrences->size() + ')'/]">
+                <labelFormat>strike_through</labelFormat>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='red']"/>
+                <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              </style>
+            </conditionalStyles>
+            <conditionalStyles predicateExpression="[self.occurrences->size() = 0/]">
+              <style labelSize="10" showIcon="false" labelExpression="[self.old + '(not found)'/]">
+                <labelFormat>strike_through</labelFormat>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='orange']"/>
+                <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              </style>
+            </conditionalStyles>
+            <conditionalStyles predicateExpression="[self.new.oclIsUndefined() or self.new.size() =0/]">
+              <style labelSize="10" showIcon="false" labelExpression="aql:self.old + '-> ?' + self.rewriteProposal() +  '   (' + self.occurrences->size() + ')'">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='purple']"/>
+                <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              </style>
+            </conditionalStyles>
+            <conditionalStyles predicateExpression="feature:underInspection">
+              <style labelSize="10" showIcon="false" labelExpression="[self.old + '->' + self.new +  ' (' + self.occurrences->size() + ')'/]">
+                <labelFormat>bold</labelFormat>
+                <labelFormat>strike_through</labelFormat>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+                <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              </style>
+            </conditionalStyles>
+            <directEdit name="Pull the proposal" mapping="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='Rewrites']/@subItemMappings[name='Rewrite']">
+              <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="var:self">
+                <subModelOperations xsi:type="tool:If" conditionExpression="[self.new.oclIsUndefined() or self.new = ''/]">
+                  <subModelOperations xsi:type="tool:SetValue" featureName="new" valueExpression="aql:self.rewriteProposal()"/>
+                </subModelOperations>
+              </firstModelOperation>
+              <mask mask="{0}"/>
+              <element name="element"/>
+              <root name="root"/>
+            </directEdit>
+            <subItemMappings name="Occurrence" domainClass="queryrewriter.Occurrence" semanticCandidatesExpression="feature:occurrences">
+              <defaultStyle labelExpression="[self.eattribute.name/]">
                 <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
                 <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
               </defaultStyle>
-              <subItemMappings name="Parent" domainClass="EObject" semanticCandidatesExpression="feature:eContainer" reusedTreeItemMappings="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='Rewrite']/@subItemMappings[name='Occurrence']/@subItemMappings[name='VSMElement']/@subItemMappings[name='Parent']">
+              <subItemMappings name="VSMElement" domainClass="EObject" semanticCandidatesExpression="feature:vsmElement">
                 <defaultStyle>
                   <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
                   <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
                 </defaultStyle>
+                <subItemMappings name="Parent" domainClass="EObject" semanticCandidatesExpression="feature:eContainer" reusedTreeItemMappings="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='Rewrites']/@subItemMappings[name='Rewrite']/@subItemMappings[name='Occurrence']/@subItemMappings[name='VSMElement']/@subItemMappings[name='Parent']">
+                  <defaultStyle>
+                    <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                    <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+                  </defaultStyle>
+                </subItemMappings>
               </subItemMappings>
             </subItemMappings>
           </subItemMappings>
         </subItemMappings>
-        <create name="Compute Rewrites" mapping="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='Rewrite']">
+        <subItemMappings name="Under Inspection" domainClass="queryrewriter.Configuration" semanticCandidatesExpression="var:self">
+          <defaultStyle labelExpression="aql:'Under Inspection' + self.rewrites->select(r |  r.underInspection)->size()">
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+          </defaultStyle>
+          <subItemMappings name="Rewrite" domainClass="queryrewriter.Rewrite" semanticCandidatesExpression="aql:self.rewrites->select(r |  r.underInspection)">
+            <defaultStyle labelSize="10" showIcon="false" labelExpression="[self.old + '->' + self.new +  ' (' + self.occurrences->size() + ')'/]">
+              <labelFormat>strike_through</labelFormat>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+              <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            </defaultStyle>
+            <conditionalStyles predicateExpression="aql:not self.isValidAQL()">
+              <style labelSize="10" showIcon="false" labelExpression="[self.old + '->' + self.new +  ' (' + self.occurrences->size() + ')'/]">
+                <labelFormat>strike_through</labelFormat>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='red']"/>
+                <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              </style>
+            </conditionalStyles>
+            <conditionalStyles predicateExpression="[self.occurrences->size() = 0/]">
+              <style labelSize="10" showIcon="false" labelExpression="[self.old + '(not found)'/]">
+                <labelFormat>strike_through</labelFormat>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='orange']"/>
+                <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              </style>
+            </conditionalStyles>
+            <conditionalStyles predicateExpression="[self.new.oclIsUndefined() or self.new.size() =0/]">
+              <style labelSize="10" showIcon="false" labelExpression="aql:self.old + '-> ?' + self.rewriteProposal() +  '   (' + self.occurrences->size() + ')'">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='purple']"/>
+                <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              </style>
+            </conditionalStyles>
+            <conditionalStyles predicateExpression="feature:underInspection">
+              <style labelSize="10" showIcon="false" labelExpression="[self.old + '->' + self.new +  ' (' + self.occurrences->size() + ')'/]">
+                <labelFormat>bold</labelFormat>
+                <labelFormat>strike_through</labelFormat>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+                <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              </style>
+            </conditionalStyles>
+            <directEdit name="Pull the proposal" mapping="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='Under%20Inspection']/@subItemMappings[name='Rewrite']">
+              <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="var:self">
+                <subModelOperations xsi:type="tool:If" conditionExpression="[self.new.oclIsUndefined() or self.new = ''/]">
+                  <subModelOperations xsi:type="tool:SetValue" featureName="new" valueExpression="aql:self.rewriteProposal()"/>
+                </subModelOperations>
+              </firstModelOperation>
+              <mask mask="{0}"/>
+              <element name="element"/>
+              <root name="root"/>
+            </directEdit>
+            <subItemMappings name="Occurrence" domainClass="queryrewriter.Occurrence" semanticCandidatesExpression="feature:occurrences">
+              <defaultStyle labelExpression="[self.eattribute.name/]">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              </defaultStyle>
+              <subItemMappings name="VSMElement" domainClass="EObject" semanticCandidatesExpression="feature:vsmElement">
+                <defaultStyle>
+                  <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                  <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+                </defaultStyle>
+                <subItemMappings name="Parent" domainClass="EObject" semanticCandidatesExpression="feature:eContainer" reusedTreeItemMappings="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='Under%20Inspection']/@subItemMappings[name='Rewrite']/@subItemMappings[name='Occurrence']/@subItemMappings[name='VSMElement']/@subItemMappings[name='Parent']">
+                  <defaultStyle>
+                    <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                    <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+                  </defaultStyle>
+                </subItemMappings>
+              </subItemMappings>
+            </subItemMappings>
+          </subItemMappings>
+        </subItemMappings>
+        <subItemMappings name="DONE" domainClass="queryrewriter.Configuration" semanticCandidatesExpression="var:self">
+          <defaultStyle labelExpression="aql:'Tested '  + self.rewrites->select(r | r.tested)->size()">
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+          </defaultStyle>
+          <subItemMappings name="TestedRewrite" domainClass="queryrewriter.Rewrite" semanticCandidatesExpression="aql:self.rewrites->select(r | r.tested)">
+            <defaultStyle labelSize="10" showIcon="false" labelExpression="[self.old + '->' + self.new +  ' (' + self.occurrences->size() + ')'/]">
+              <labelFormat>strike_through</labelFormat>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+              <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            </defaultStyle>
+            <conditionalStyles predicateExpression="aql:not self.isValidAQL()">
+              <style labelSize="10" showIcon="false" labelExpression="[self.old + '->' + self.new +  ' (' + self.occurrences->size() + ')'/]">
+                <labelFormat>strike_through</labelFormat>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='red']"/>
+                <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              </style>
+            </conditionalStyles>
+            <conditionalStyles predicateExpression="[self.occurrences->size() = 0/]">
+              <style labelSize="10" showIcon="false" labelExpression="[self.old + '(not found)'/]">
+                <labelFormat>strike_through</labelFormat>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='orange']"/>
+                <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              </style>
+            </conditionalStyles>
+            <conditionalStyles predicateExpression="[self.new.oclIsUndefined() or self.new.size() =0/]">
+              <style labelSize="10" showIcon="false" labelExpression="aql:self.old + '-> ?' + self.rewriteProposal() +  '   (' + self.occurrences->size() + ')'">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='purple']"/>
+                <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              </style>
+            </conditionalStyles>
+            <conditionalStyles predicateExpression="feature:underInspection">
+              <style labelSize="10" showIcon="false" labelExpression="[self.old + '->' + self.new +  ' (' + self.occurrences->size() + ')'/]">
+                <labelFormat>bold</labelFormat>
+                <labelFormat>strike_through</labelFormat>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+                <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              </style>
+            </conditionalStyles>
+            <directEdit name="Pull the proposal" mapping="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='DONE']/@subItemMappings[name='TestedRewrite']">
+              <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="var:self">
+                <subModelOperations xsi:type="tool:If" conditionExpression="[self.new.oclIsUndefined() or self.new = ''/]">
+                  <subModelOperations xsi:type="tool:SetValue" featureName="new" valueExpression="aql:self.rewriteProposal()"/>
+                </subModelOperations>
+              </firstModelOperation>
+              <mask mask="{0}"/>
+              <element name="element"/>
+              <root name="root"/>
+            </directEdit>
+            <subItemMappings name="Occurrence" domainClass="queryrewriter.Occurrence" semanticCandidatesExpression="feature:occurrences">
+              <defaultStyle labelExpression="[self.eattribute.name/]">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              </defaultStyle>
+              <subItemMappings name="VSMElement" domainClass="EObject" semanticCandidatesExpression="feature:vsmElement">
+                <defaultStyle>
+                  <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                  <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+                </defaultStyle>
+                <subItemMappings name="Parent" domainClass="EObject" semanticCandidatesExpression="feature:eContainer" reusedTreeItemMappings="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='DONE']/@subItemMappings[name='TestedRewrite']/@subItemMappings[name='Occurrence']/@subItemMappings[name='VSMElement']/@subItemMappings[name='Parent']">
+                  <defaultStyle>
+                    <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                    <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+                  </defaultStyle>
+                </subItemMappings>
+              </subItemMappings>
+            </subItemMappings>
+          </subItemMappings>
+        </subItemMappings>
+        <subItemMappings name="No Occurrences" domainClass="queryrewriter.Configuration" semanticCandidatesExpression="var:self">
+          <defaultStyle labelExpression="aql: 'No Occurrences' + self.rewrites->select(r | r.occurrences->size() > 0)->size()">
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+          </defaultStyle>
+          <subItemMappings name="No Occurrences" domainClass="queryrewriter.Rewrite" semanticCandidatesExpression="aql:self.rewrites->select(r | r.occurrences->size() > 0)">
+            <defaultStyle labelSize="10" showIcon="false" labelExpression="[self.old + '->' + self.new +  ' (' + self.occurrences->size() + ')'/]">
+              <labelFormat>strike_through</labelFormat>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+              <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            </defaultStyle>
+            <conditionalStyles predicateExpression="aql:not self.isValidAQL()">
+              <style labelSize="10" showIcon="false" labelExpression="[self.old + '->' + self.new +  ' (' + self.occurrences->size() + ')'/]">
+                <labelFormat>strike_through</labelFormat>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='red']"/>
+                <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              </style>
+            </conditionalStyles>
+            <conditionalStyles predicateExpression="[self.occurrences->size() = 0/]">
+              <style labelSize="10" showIcon="false" labelExpression="[self.old + '(not found)'/]">
+                <labelFormat>strike_through</labelFormat>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='orange']"/>
+                <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              </style>
+            </conditionalStyles>
+            <conditionalStyles predicateExpression="[self.new.oclIsUndefined() or self.new.size() =0/]">
+              <style labelSize="10" showIcon="false" labelExpression="aql:self.old + '-> ?' + self.rewriteProposal() +  '   (' + self.occurrences->size() + ')'">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='purple']"/>
+                <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              </style>
+            </conditionalStyles>
+            <conditionalStyles predicateExpression="feature:underInspection">
+              <style labelSize="10" showIcon="false" labelExpression="[self.old + '->' + self.new +  ' (' + self.occurrences->size() + ')'/]">
+                <labelFormat>bold</labelFormat>
+                <labelFormat>strike_through</labelFormat>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+                <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              </style>
+            </conditionalStyles>
+            <directEdit name="Pull the proposal" mapping="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='No%20Occurrences']/@subItemMappings[name='No%20Occurrences']">
+              <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="var:self">
+                <subModelOperations xsi:type="tool:If" conditionExpression="[self.new.oclIsUndefined() or self.new = ''/]">
+                  <subModelOperations xsi:type="tool:SetValue" featureName="new" valueExpression="aql:self.rewriteProposal()"/>
+                </subModelOperations>
+              </firstModelOperation>
+              <mask mask="{0}"/>
+              <element name="element"/>
+              <root name="root"/>
+            </directEdit>
+            <subItemMappings name="Occurrence" domainClass="queryrewriter.Occurrence" semanticCandidatesExpression="feature:occurrences">
+              <defaultStyle labelExpression="[self.eattribute.name/]">
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              </defaultStyle>
+              <subItemMappings name="VSMElement" domainClass="EObject" semanticCandidatesExpression="feature:vsmElement">
+                <defaultStyle>
+                  <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                  <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+                </defaultStyle>
+                <subItemMappings name="Parent" domainClass="EObject" semanticCandidatesExpression="feature:eContainer" reusedTreeItemMappings="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='No%20Occurrences']/@subItemMappings[name='No%20Occurrences']/@subItemMappings[name='Occurrence']/@subItemMappings[name='VSMElement']/@subItemMappings[name='Parent']">
+                  <defaultStyle>
+                    <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                    <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+                  </defaultStyle>
+                </subItemMappings>
+              </subItemMappings>
+            </subItemMappings>
+          </subItemMappings>
+        </subItemMappings>
+        <create name="Compute Rewrites" mapping="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='Rewrites']/@subItemMappings[name='Rewrite']">
           <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="service:computeOccurrences()"/>
           <variables name="root" documentation="The semantic element of the tree."/>
           <variables name="element" documentation="The semantic currently edited element."/>
           <variables name="container" documentation="The semantic element corresponding to the view container."/>
         </create>
-        <create name="Apply Rewrites" mapping="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='Rewrite']">
+        <create name="Apply Rewrites" mapping="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='Rewrites']/@subItemMappings[name='Rewrite']">
           <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="service:applyRewrites()"/>
           <variables name="root" documentation="The semantic element of the tree."/>
           <variables name="element" documentation="The semantic currently edited element."/>
           <variables name="container" documentation="The semantic element corresponding to the view container."/>
         </create>
-        <create name="Reset Rewrites" mapping="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='Rewrite']">
+        <create name="Reset Rewrites" mapping="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='Rewrites']/@subItemMappings[name='Rewrite']">
           <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="service:resetRewrites()"/>
           <variables name="root" documentation="The semantic element of the tree."/>
           <variables name="element" documentation="The semantic currently edited element."/>
           <variables name="container" documentation="The semantic element corresponding to the view container."/>
         </create>
-        <create name="Fill known rewrites" mapping="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='Rewrite']">
+        <create name="Fill known rewrites" mapping="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='Rewrites']/@subItemMappings[name='Rewrite']">
           <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="service:fillKnownRewrites()"/>
+          <variables name="root" documentation="The semantic element of the tree."/>
+          <variables name="element" documentation="The semantic currently edited element."/>
+          <variables name="container" documentation="The semantic element corresponding to the view container."/>
+        </create>
+        <create name="Confirm rewrites under inspection" mapping="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='Rewrites']/@subItemMappings[name='Rewrite']">
+          <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="service:confirmUnderInspection()"/>
+          <variables name="root" documentation="The semantic element of the tree."/>
+          <variables name="element" documentation="The semantic currently edited element."/>
+          <variables name="container" documentation="The semantic element corresponding to the view container."/>
+        </create>
+        <create name="Make non tested rewrites under inspection" mapping="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='Rewrites']/@subItemMappings[name='Rewrite']">
+          <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="service:makeNonTestedRewritesUnderInspection()"/>
+          <variables name="root" documentation="The semantic element of the tree."/>
+          <variables name="element" documentation="The semantic currently edited element."/>
+          <variables name="container" documentation="The semantic element corresponding to the view container."/>
+        </create>
+        <create name="Make all rewrites under inspection" mapping="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='Rewrites']/@subItemMappings[name='Rewrite']">
+          <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="service:makeAllUnderInspection()"/>
           <variables name="root" documentation="The semantic element of the tree."/>
           <variables name="element" documentation="The semantic currently edited element."/>
           <variables name="container" documentation="The semantic element corresponding to the view container."/>

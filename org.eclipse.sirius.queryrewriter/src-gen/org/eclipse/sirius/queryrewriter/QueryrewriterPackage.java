@@ -177,13 +177,22 @@ public interface QueryrewriterPackage extends EPackage {
 	int REWRITE__UNDER_INSPECTION = 3;
 
 	/**
+	 * The feature id for the '<em><b>Tested</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REWRITE__TESTED = 4;
+
+	/**
 	 * The number of structural features of the '<em>Rewrite</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REWRITE_FEATURE_COUNT = 4;
+	int REWRITE_FEATURE_COUNT = 5;
 
 	/**
 	 * The number of operations of the '<em>Rewrite</em>' class.
@@ -371,6 +380,17 @@ public interface QueryrewriterPackage extends EPackage {
 	EAttribute getRewrite_UnderInspection();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.sirius.queryrewriter.Rewrite#isTested <em>Tested</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Tested</em>'.
+	 * @see org.eclipse.sirius.queryrewriter.Rewrite#isTested()
+	 * @see #getRewrite()
+	 * @generated
+	 */
+	EAttribute getRewrite_Tested();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.sirius.queryrewriter.Occurrence <em>Occurrence</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -526,6 +546,14 @@ public interface QueryrewriterPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute REWRITE__UNDER_INSPECTION = eINSTANCE.getRewrite_UnderInspection();
+
+		/**
+		 * The meta object literal for the '<em><b>Tested</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REWRITE__TESTED = eINSTANCE.getRewrite_Tested();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.sirius.queryrewriter.impl.OccurrenceImpl <em>Occurrence</em>}' class.

@@ -34,6 +34,7 @@ import org.eclipse.sirius.queryrewriter.Rewrite;
  *   <li>{@link org.eclipse.sirius.queryrewriter.impl.RewriteImpl#getNew <em>New</em>}</li>
  *   <li>{@link org.eclipse.sirius.queryrewriter.impl.RewriteImpl#getOccurrences <em>Occurrences</em>}</li>
  *   <li>{@link org.eclipse.sirius.queryrewriter.impl.RewriteImpl#isUnderInspection <em>Under Inspection</em>}</li>
+ *   <li>{@link org.eclipse.sirius.queryrewriter.impl.RewriteImpl#isTested <em>Tested</em>}</li>
  * </ul>
  *
  * @generated
@@ -97,7 +98,7 @@ public class RewriteImpl extends MinimalEObjectImpl.Container implements Rewrite
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean UNDER_INSPECTION_EDEFAULT = false;
+	protected static final boolean UNDER_INSPECTION_EDEFAULT = true;
 
 	/**
 	 * The cached value of the '{@link #isUnderInspection() <em>Under Inspection</em>}' attribute.
@@ -108,6 +109,26 @@ public class RewriteImpl extends MinimalEObjectImpl.Container implements Rewrite
 	 * @ordered
 	 */
 	protected boolean underInspection = UNDER_INSPECTION_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isTested() <em>Tested</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isTested()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean TESTED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isTested() <em>Tested</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isTested()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean tested = TESTED_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -208,6 +229,27 @@ public class RewriteImpl extends MinimalEObjectImpl.Container implements Rewrite
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isTested() {
+		return tested;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTested(boolean newTested) {
+		boolean oldTested = tested;
+		tested = newTested;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QueryrewriterPackage.REWRITE__TESTED, oldTested, tested));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -233,6 +275,8 @@ public class RewriteImpl extends MinimalEObjectImpl.Container implements Rewrite
 				return getOccurrences();
 			case QueryrewriterPackage.REWRITE__UNDER_INSPECTION:
 				return isUnderInspection();
+			case QueryrewriterPackage.REWRITE__TESTED:
+				return isTested();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -259,6 +303,9 @@ public class RewriteImpl extends MinimalEObjectImpl.Container implements Rewrite
 			case QueryrewriterPackage.REWRITE__UNDER_INSPECTION:
 				setUnderInspection((Boolean)newValue);
 				return;
+			case QueryrewriterPackage.REWRITE__TESTED:
+				setTested((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -283,6 +330,9 @@ public class RewriteImpl extends MinimalEObjectImpl.Container implements Rewrite
 			case QueryrewriterPackage.REWRITE__UNDER_INSPECTION:
 				setUnderInspection(UNDER_INSPECTION_EDEFAULT);
 				return;
+			case QueryrewriterPackage.REWRITE__TESTED:
+				setTested(TESTED_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -303,6 +353,8 @@ public class RewriteImpl extends MinimalEObjectImpl.Container implements Rewrite
 				return occurrences != null && !occurrences.isEmpty();
 			case QueryrewriterPackage.REWRITE__UNDER_INSPECTION:
 				return underInspection != UNDER_INSPECTION_EDEFAULT;
+			case QueryrewriterPackage.REWRITE__TESTED:
+				return tested != TESTED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -323,6 +375,8 @@ public class RewriteImpl extends MinimalEObjectImpl.Container implements Rewrite
 		result.append(new_);
 		result.append(", underInspection: ");
 		result.append(underInspection);
+		result.append(", tested: ");
+		result.append(tested);
 		result.append(')');
 		return result.toString();
 	}

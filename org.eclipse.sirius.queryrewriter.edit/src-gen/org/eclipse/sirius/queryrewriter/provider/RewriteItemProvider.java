@@ -66,6 +66,7 @@ public class RewriteItemProvider
 			addOldPropertyDescriptor(object);
 			addNewPropertyDescriptor(object);
 			addUnderInspectionPropertyDescriptor(object);
+			addTestedPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -128,6 +129,28 @@ public class RewriteItemProvider
 				 getString("_UI_Rewrite_underInspection_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Rewrite_underInspection_feature", "_UI_Rewrite_type"),
 				 QueryrewriterPackage.Literals.REWRITE__UNDER_INSPECTION,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Tested feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTestedPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Rewrite_tested_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Rewrite_tested_feature", "_UI_Rewrite_type"),
+				 QueryrewriterPackage.Literals.REWRITE__TESTED,
 				 true,
 				 false,
 				 false,
@@ -217,6 +240,7 @@ public class RewriteItemProvider
 			case QueryrewriterPackage.REWRITE__OLD:
 			case QueryrewriterPackage.REWRITE__NEW:
 			case QueryrewriterPackage.REWRITE__UNDER_INSPECTION:
+			case QueryrewriterPackage.REWRITE__TESTED:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case QueryrewriterPackage.REWRITE__OCCURRENCES:

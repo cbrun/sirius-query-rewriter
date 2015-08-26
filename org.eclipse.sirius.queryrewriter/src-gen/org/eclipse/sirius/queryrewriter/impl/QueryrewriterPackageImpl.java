@@ -225,6 +225,15 @@ public class QueryrewriterPackageImpl extends EPackageImpl implements Queryrewri
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getRewrite_Tested() {
+		return (EAttribute)rewriteEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getOccurrence() {
 		return occurrenceEClass;
 	}
@@ -296,6 +305,7 @@ public class QueryrewriterPackageImpl extends EPackageImpl implements Queryrewri
 		createEAttribute(rewriteEClass, REWRITE__NEW);
 		createEReference(rewriteEClass, REWRITE__OCCURRENCES);
 		createEAttribute(rewriteEClass, REWRITE__UNDER_INSPECTION);
+		createEAttribute(rewriteEClass, REWRITE__TESTED);
 
 		occurrenceEClass = createEClass(OCCURRENCE);
 		createEReference(occurrenceEClass, OCCURRENCE__EATTRIBUTE);
@@ -350,7 +360,8 @@ public class QueryrewriterPackageImpl extends EPackageImpl implements Queryrewri
 		initEAttribute(getRewrite_Old(), theDescriptionPackage.getInterpretedExpression(), "old", null, 0, 1, Rewrite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRewrite_New(), theDescriptionPackage.getInterpretedExpression(), "new", null, 0, 1, Rewrite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRewrite_Occurrences(), this.getOccurrence(), null, "occurrences", null, 0, -1, Rewrite.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getRewrite_UnderInspection(), theEcorePackage.getEBoolean(), "underInspection", null, 0, 1, Rewrite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRewrite_UnderInspection(), theEcorePackage.getEBoolean(), "underInspection", "true", 0, 1, Rewrite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRewrite_Tested(), theEcorePackage.getEBoolean(), "tested", null, 0, 1, Rewrite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(occurrenceEClass, Occurrence.class, "Occurrence", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOccurrence_Eattribute(), theEcorePackage.getEAttribute(), null, "eattribute", null, 0, 1, Occurrence.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

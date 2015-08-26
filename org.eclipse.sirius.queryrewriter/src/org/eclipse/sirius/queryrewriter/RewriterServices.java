@@ -59,6 +59,38 @@ public class RewriterServices {
 		return conf;
 	}
 
+	public Configuration makeAllUnderInspection(Configuration conf) {
+		for (Rewrite r : conf.getRewrites()) {
+			if (!StringUtil.isEmpty(r.getNew())) {
+				r.setUnderInspection(true);
+				r.setTested(false);
+			} else {
+				r.setUnderInspection(false);
+				r.setTested(false);
+			}
+		}
+		return conf;
+	}
+
+	public Configuration makeNonTestedRewritesUnderInspection(Configuration conf) {
+		for (Rewrite r : conf.getRewrites()) {
+			if (!StringUtil.isEmpty(r.getNew()) && !r.isTested()) {
+				r.setUnderInspection(true);
+			}
+		}
+		return conf;
+	}
+
+	public Configuration confirmUnderInspection(Configuration conf) {
+		for (Rewrite r : conf.getRewrites()) {
+			if (r.isUnderInspection()) {
+				r.setUnderInspection(false);
+				r.setTested(true);
+			}
+		}
+		return conf;
+	}
+
 	public Configuration fillKnownRewrites(Configuration conf) {
 		for (Rewrite r : conf.getRewrites()) {
 			String translation = KnownRewrites.conversion.get(r.getOld());
@@ -232,8 +264,9 @@ public class RewriterServices {
 	}
 
 	private String translateBody(String body) {
-		if (body.startsWith("self") || body.startsWith("current") || body.startsWith("$") || body.startsWith("if") || body.startsWith("(")) {
-			
+		if (body.startsWith("self") || body.startsWith("current") || body.startsWith("$") || body.startsWith("if")
+				|| body.startsWith("(")) {
+
 		} else {
 			/*
 			 * we need to introduce self
@@ -246,7 +279,7 @@ public class RewriterServices {
 		body = body.replace("!=", "<>");
 		body = body.replace("!", " not ");
 		body = body.replace("~.", "eInverse().");
-		
+
 		body = appendSelfOnDirectServiceReferences(body, "eAllContents", "eContents", "eContainer", "filter", "eClass");
 		body = body.replace(".filter", "->filter");
 		body = body.replace("self()", "self");
@@ -277,19 +310,19 @@ public class RewriterServices {
 		body = body.replaceAll("filter\\(\"([a-zA-Z]+)\"\\)", "filter($1)");
 		body = body.replaceAll("filter\\(\"([a-zA-Z]+)\\.([a-zA-Z]+)\"\\)", "filter($1::$2)");
 		body = body.replaceAll("\\[(.*)\\]", "->select( e | e.$1)");
-		
-		
+
 		body = body.replace("EReference", "ecore::EReference");
 		body = body.replace("EClassifier", "ecore::EClassifier");
 		body = body.replace("EPackage", "ecore::EPackage");
 		body = body.replace("EClass", "ecore::EClass");
 		body = body.replace("EAttribute", "ecore::EAttribute");
 		body = body.replace("EDataType", "ecore::EDataType");
+		body = body.replace("EOperation", "ecore::EOperation");
 		body = body.replace("DSemanticDecorator", "viewpoint::DSemanticDecorator");
 		body = body.replace("DNode", "diagram::DNode");
 		body = body.replace("Interaction", "interactions::Interaction");
-		
-		body = body.replace('"','\'');
+
+		body = body.replace('"', '\'');
 		return body;
 	}
 
@@ -298,7 +331,7 @@ public class RewriterServices {
 			body = body.replace(" " + name, " self." + name);
 			body = body.replace("(" + name, "(self." + name);
 			body = body.replace("[" + name, "[self." + name);
-			body = body.replace(name + ".", name+"().");
+			body = body.replace(name + ".", name + "().");
 		}
 		return body;
 	}

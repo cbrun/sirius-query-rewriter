@@ -19,7 +19,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="new" eType="ecore:EDataType ../../org.eclipse.sirius/model/viewpoint.ecore#//description/InterpretedExpression"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="occurrences" upperBound="-1"
         eType="#//Occurrence" transient="true" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="underInspection" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="underInspection" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tested" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Occurrence">
     <eStructuralFeatures xsi:type="ecore:EReference" name="eattribute" eType="ecore:EClass ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EAttribute"/>

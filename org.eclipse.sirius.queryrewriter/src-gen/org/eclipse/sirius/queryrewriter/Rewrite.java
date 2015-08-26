@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.sirius.queryrewriter.Rewrite#getNew <em>New</em>}</li>
  *   <li>{@link org.eclipse.sirius.queryrewriter.Rewrite#getOccurrences <em>Occurrences</em>}</li>
  *   <li>{@link org.eclipse.sirius.queryrewriter.Rewrite#isUnderInspection <em>Under Inspection</em>}</li>
+ *   <li>{@link org.eclipse.sirius.queryrewriter.Rewrite#isTested <em>Tested</em>}</li>
  * </ul>
  *
  * @see org.eclipse.sirius.queryrewriter.QueryrewriterPackage#getRewrite()
@@ -96,6 +97,7 @@ public interface Rewrite extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Under Inspection</b></em>' attribute.
+	 * The default value is <code>"true"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Under Inspection</em>' attribute isn't clear,
@@ -105,7 +107,7 @@ public interface Rewrite extends EObject {
 	 * @return the value of the '<em>Under Inspection</em>' attribute.
 	 * @see #setUnderInspection(boolean)
 	 * @see org.eclipse.sirius.queryrewriter.QueryrewriterPackage#getRewrite_UnderInspection()
-	 * @model
+	 * @model default="true"
 	 * @generated
 	 */
 	boolean isUnderInspection();
@@ -119,5 +121,31 @@ public interface Rewrite extends EObject {
 	 * @generated
 	 */
 	void setUnderInspection(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Tested</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Tested</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Tested</em>' attribute.
+	 * @see #setTested(boolean)
+	 * @see org.eclipse.sirius.queryrewriter.QueryrewriterPackage#getRewrite_Tested()
+	 * @model
+	 * @generated
+	 */
+	boolean isTested();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.sirius.queryrewriter.Rewrite#isTested <em>Tested</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Tested</em>' attribute.
+	 * @see #isTested()
+	 * @generated
+	 */
+	void setTested(boolean value);
 
 } // Rewrite
