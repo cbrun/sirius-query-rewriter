@@ -217,11 +217,11 @@
           </subItemMappings>
         </subItemMappings>
         <subItemMappings name="No Occurrences" domainClass="queryrewriter.Configuration" semanticCandidatesExpression="var:self">
-          <defaultStyle labelExpression="aql: 'No Occurrences' + self.rewrites->select(r | r.occurrences->size() > 0)->size()">
+          <defaultStyle labelExpression="aql: 'No Occurrences' + self.rewrites->select(r | r.occurrences->size() = 0)->size()">
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
           </defaultStyle>
-          <subItemMappings name="No Occurrences" domainClass="queryrewriter.Rewrite" semanticCandidatesExpression="aql:self.rewrites->select(r | r.occurrences->size() > 0)">
+          <subItemMappings name="No Occurrences" domainClass="queryrewriter.Rewrite" semanticCandidatesExpression="aql:self.rewrites->select(r | r.occurrences->size() = 0)">
             <defaultStyle labelSize="10" showIcon="false" labelExpression="[self.old + '->' + self.new +  ' (' + self.occurrences->size() + ')'/]">
               <labelFormat>strike_through</labelFormat>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>

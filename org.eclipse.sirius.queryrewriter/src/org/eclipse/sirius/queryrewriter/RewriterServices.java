@@ -32,12 +32,11 @@ public class RewriterServices {
 						&& o.getVsmElement().eGet(o.getEattribute()) != null) {
 					Object currentValue = o.getVsmElement()
 							.eGet(o.getVsmElement().eClass().getEStructuralFeature(o.getEattribute().getName()));
-					if (r.getOld().equals(currentValue)) {
-						if (r.getNew() != null && r.getNew().length() > 0) {
-							o.getVsmElement().eSet(
-									o.getVsmElement().eClass().getEStructuralFeature(o.getEattribute().getName()),
-									r.getNew());
-						}
+					if (r.getNew() != null && r.getNew().length() > 0) {
+						o.getVsmElement().eSet(
+								o.getVsmElement().eClass().getEStructuralFeature(o.getEattribute().getName()),
+								r.getNew());
+						r.setUnderInspection(true);
 					}
 				}
 
@@ -289,6 +288,12 @@ public class RewriterServices {
 		body = body.replace(".nSize(", "->size(");
 		body = body.replace(".nSize", "->size()");
 		body = body.replace(".nGet(0)", "->first()");
+		body = body.replace(".nGet(1)", "->at(2)");
+		body = body.replace(".nGet(2)", "->at(3)");
+		body = body.replace(".nGet(3)", "->at(4)");
+		body = body.replace(".nGet(4)", "->at(5)");
+		body = body.replace(".nGet(5)", "->at(6)");
+		body = body.replace(".nGet(6)", "->at(7)");
 		body = body.replace(".nFirst(", "->first(");
 		body = body.replace(".nFirst", "->first()");
 		body = body.replace(".nLast(", "->last()");
