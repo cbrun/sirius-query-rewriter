@@ -30,8 +30,8 @@
             </style>
           </conditionalStyles>
           <conditionalStyles predicateExpression="[self.new.oclIsUndefined() or self.new.size() =0/]">
-            <style labelSize="10" showIcon="false" labelExpression="[self.old + '-> ?' +  ' (' + self.occurrences->size() + ')'/]">
-              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <style labelSize="10" showIcon="false" labelExpression="aql:self.old + '-> ?' + self.rewriteProposal() +  '   (' + self.occurrences->size() + ')'">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='purple']"/>
               <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
             </style>
           </conditionalStyles>
@@ -43,6 +43,16 @@
               <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
             </style>
           </conditionalStyles>
+          <directEdit name="Pull the proposal" mapping="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='Rewrite']">
+            <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="var:self">
+              <subModelOperations xsi:type="tool:If" conditionExpression="[self.new.oclIsUndefined() or self.new = ''/]">
+                <subModelOperations xsi:type="tool:SetValue" featureName="new" valueExpression="aql:self.rewriteProposal()"/>
+              </subModelOperations>
+            </firstModelOperation>
+            <mask mask="{0}"/>
+            <element name="element"/>
+            <root name="root"/>
+          </directEdit>
           <subItemMappings name="Occurrence" domainClass="queryrewriter.Occurrence" semanticCandidatesExpression="feature:occurrences">
             <defaultStyle labelExpression="[self.eattribute.name/]">
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>

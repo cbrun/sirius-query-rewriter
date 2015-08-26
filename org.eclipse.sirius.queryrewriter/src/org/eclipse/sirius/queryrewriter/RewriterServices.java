@@ -186,29 +186,120 @@ public class RewriterServices {
 	public boolean isValidAQL(Rewrite r) {
 		if (r.getNew() != null && r.getNew().startsWith("aql:")) {
 			String expression = r.getNew();
-			
+
 			for (Occurrence occ : r.getOccurrences()) {
-			
+
 				/*
-				EObject target = occ.getVsmElement();
-				EStructuralFeature feature = occ.eClass().getEStructuralFeature(occ.getEattribute().getName());
-				Collection<IInterpreterStatus> errors = new LinkedHashSet();
-				if (!StringUtil.isEmpty(expression)) {
-					IInterpreterContext context = SiriusInterpreterContextFactory.createInterpreterContext(target,
-							feature);
-					errors = MultiLanguagesValidator.getInstance().validateExpression(context, expression)
-							.getStatuses();
-					boolean hasError = false;
-					for (IInterpreterStatus iInterpreterStatus : errors) {
-						if (IInterpreterStatus.ERROR.equals(iInterpreterStatus.getSeverity())) {
-							hasError = true;
-						}
-					}
-					return !hasError;
-				}*/
+				 * EObject target = occ.getVsmElement(); EStructuralFeature
+				 * feature =
+				 * occ.eClass().getEStructuralFeature(occ.getEattribute().
+				 * getName()); Collection<IInterpreterStatus> errors = new
+				 * LinkedHashSet(); if (!StringUtil.isEmpty(expression)) {
+				 * IInterpreterContext context =
+				 * SiriusInterpreterContextFactory.createInterpreterContext(
+				 * target, feature); errors =
+				 * MultiLanguagesValidator.getInstance().validateExpression(
+				 * context, expression) .getStatuses(); boolean hasError =
+				 * false; for (IInterpreterStatus iInterpreterStatus : errors) {
+				 * if (IInterpreterStatus.ERROR.equals(iInterpreterStatus.
+				 * getSeverity())) { hasError = true; } } return !hasError; }
+				 */
 			}
 
 		}
 		return true;
+	}
+
+	public String rewriteProposal(Rewrite r) {
+		String result = r.getOld();
+		String queryToTranslate = r.getOld();
+		if (QueryLanguageUtil.getType(queryToTranslate) == QueryLanguage.LEGACY) {
+			String prefix = queryToTranslate.substring(0, queryToTranslate.indexOf("<%"));
+			String suffix = queryToTranslate.substring(queryToTranslate.indexOf("%>") + 2);
+			String body = queryToTranslate.substring(prefix.length() + 2,
+					queryToTranslate.length() - suffix.length() - 2);
+			String translatedBody = translateBody(body);
+			result = "aql:";
+			if (prefix.length() > 0) {
+				result += "'" + prefix + "' + ";
+			}
+			result += translatedBody;
+			if (suffix.length() > 0) {
+				result += " + '" + suffix + "'";
+			}
+		}
+		return result;
+	}
+
+	private String translateBody(String body) {
+		if (body.startsWith("self") || body.startsWith("current") || body.startsWith("$") || body.startsWith("if") || body.startsWith("(")) {
+			
+		} else {
+			/*
+			 * we need to introduce self
+			 */
+			body = "self." + body;
+		}
+		body = body.replace("&&", " and ");
+		body = body.replace("||", " or ");
+		body = body.replace("==", "=");
+		body = body.replace("!=", "<>");
+		body = body.replace("!", " not ");
+		body = body.replace("~.", "eInverse().");
+		
+		body = appendSelfOnDirectServiceReferences(body, "eAllContents", "eContents", "eContainer", "filter", "eClass");
+		body = body.replace(".filter", "->filter");
+		body = body.replace("self()", "self");
+		body = body.replace("current ", "self ");
+		body = body.replace("current.", "self.");
+		body = body.replace("eClass.", "eClass().");
+		body = body.replace(".nSize(", "->size(");
+		body = body.replace(".nSize", "->size()");
+		body = body.replace(".nGet(0)", "->first()");
+		body = body.replace(".nFirst(", "->first(");
+		body = body.replace(".nFirst", "->first()");
+		body = body.replace(".nLast(", "->last()");
+		body = body.replace(".trim(", "->trim()");
+		body = body.replace(".trim", "->trim()");
+		body = body.replace("$0", "arg0");
+		body = body.replace("$1", "arg1");
+		body = body.replace("$2", "arg2");
+		body = body.replace("$3", "arg3");
+		body = body.replace("$4", "arg4");
+		body = body.replace("$5", "arg5");
+		body = body.replace("$", "");
+		body = body.replaceAll("eAllContents\\(\"([a-zA-Z]+)\"\\)", "eAllContents($1)");
+		body = body.replaceAll("eAllContents\\(\"([a-zA-Z]+)\\.([a-zA-Z]+)\"\\)", "eAllContents($1::$2)");
+		body = body.replaceAll("eContainer\\(\"([a-zA-Z]+)\"\\)", "eContainerOrSelf($1)");
+		/*
+		 * filter with simple type name
+		 */
+		body = body.replaceAll("filter\\(\"([a-zA-Z]+)\"\\)", "filter($1)");
+		body = body.replaceAll("filter\\(\"([a-zA-Z]+)\\.([a-zA-Z]+)\"\\)", "filter($1::$2)");
+		body = body.replaceAll("\\[(.*)\\]", "->select( e | e.$1)");
+		
+		
+		body = body.replace("EReference", "ecore::EReference");
+		body = body.replace("EClassifier", "ecore::EClassifier");
+		body = body.replace("EPackage", "ecore::EPackage");
+		body = body.replace("EClass", "ecore::EClass");
+		body = body.replace("EAttribute", "ecore::EAttribute");
+		body = body.replace("EDataType", "ecore::EDataType");
+		body = body.replace("DSemanticDecorator", "viewpoint::DSemanticDecorator");
+		body = body.replace("DNode", "diagram::DNode");
+		body = body.replace("Interaction", "interactions::Interaction");
+		
+		body = body.replace('"','\'');
+		return body;
+	}
+
+	private String appendSelfOnDirectServiceReferences(String body, String... serviceNames) {
+		for (String name : serviceNames) {
+			body = body.replace(" " + name, " self." + name);
+			body = body.replace("(" + name, "(self." + name);
+			body = body.replace("[" + name, "[self." + name);
+			body = body.replace(name + ".", name+"().");
+		}
+		return body;
 	}
 }
