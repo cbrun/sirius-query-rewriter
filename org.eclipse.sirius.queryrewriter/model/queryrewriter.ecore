@@ -13,6 +13,12 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="languagesToRewrite" upperBound="-1"
         eType="#//QueryLanguage"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="autoFill" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="includedConfigurations"
+        upperBound="-1" eType="#//Configuration"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nameRewrites" upperBound="-1"
+        eType="#//NameRewrite" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="manualGroups" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.sirius/model/viewpoint.ecore#//description/Group"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Rewrite">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="old" eType="ecore:EDataType ../../org.eclipse.sirius/model/viewpoint.ecore#//description/InterpretedExpression"/>
@@ -36,5 +42,9 @@
     <eLiterals name="FEATURE" value="5"/>
     <eLiterals name="VAR" value="6"/>
     <eLiterals name="SERVICE" value="7"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NameRewrite">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="old" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="new" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

@@ -60,6 +60,7 @@ public class QueryrewriterFactoryImpl extends EFactoryImpl implements Queryrewri
 			case QueryrewriterPackage.CONFIGURATION: return createConfiguration();
 			case QueryrewriterPackage.REWRITE: return createRewrite();
 			case QueryrewriterPackage.OCCURRENCE: return createOccurrence();
+			case QueryrewriterPackage.NAME_REWRITE: return createNameRewrite();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -123,6 +124,16 @@ public class QueryrewriterFactoryImpl extends EFactoryImpl implements Queryrewri
 	public Occurrence createOccurrence() {
 		OccurrenceImpl occurrence = new OccurrenceImpl();
 		return occurrence;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NameRewrite createNameRewrite() {
+		NameRewriteImpl nameRewrite = new NameRewriteImpl();
+		return nameRewrite;
 	}
 
 	/**

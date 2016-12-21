@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/tree/description/1.0.0" xmlns:description_2="http://www.eclipse.org/sirius/table/description/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/description/tool/1.1.0" name="queryrewriter" version="10.0.0.201505222000">
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/tree/description/1.0.0" xmlns:tool="http://www.eclipse.org/sirius/description/tool/1.1.0" name="queryrewriter" version="11.1.1.201610211630">
   <ownedViewpoints name="QueryRewriter">
     <ownedRepresentations xsi:type="description_1:TreeDescription" name="Configuration" initialisation="true" domainClass="queryrewriter.Configuration">
       <metamodel href="http://www.eclipse.org/sirius/queryrewriter#/"/>
@@ -10,7 +10,7 @@
           <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
         </defaultStyle>
         <subItemMappings name="Rewrites" domainClass="queryrewriter.Configuration" semanticCandidatesExpression="var:self">
-          <defaultStyle labelExpression="aql:'TODO : ' + self.rewrites->select(r | not r.tested and not r.underInspection and r.occurrences->size() > 0)->size()">
+          <defaultStyle labelExpression="aql:'TODO : ' + self.getAllRewrites()->select(r | not r.tested and not r.underInspection and r.occurrences->size() > 0)->size()">
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
           </defaultStyle>
@@ -73,17 +73,29 @@
                     <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
                     <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
                   </defaultStyle>
+                  <conditionalStyles predicateExpression="aql:self.eContainer() = null">
+                    <style labelExpression="aql: self.name + ' ' + self.eResource().getURI()">
+                      <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                      <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+                    </style>
+                  </conditionalStyles>
+                  <subItemMappings name="Services" domainClass="JavaExtension" semanticCandidatesExpression="feature:eAllContents">
+                    <defaultStyle labelExpression="feature:qualifiedClassName">
+                      <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                      <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+                    </defaultStyle>
+                  </subItemMappings>
                 </subItemMappings>
               </subItemMappings>
             </subItemMappings>
           </subItemMappings>
         </subItemMappings>
         <subItemMappings name="Under Inspection" domainClass="queryrewriter.Configuration" semanticCandidatesExpression="var:self">
-          <defaultStyle labelExpression="aql:'Under Inspection' + self.rewrites->select(r |  r.underInspection)->size()">
+          <defaultStyle labelExpression="aql:'Under Inspection' + self.getAllRewrites()->select(r |  r.underInspection and not r.tested)->size()">
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
           </defaultStyle>
-          <subItemMappings name="Rewrite" domainClass="queryrewriter.Rewrite" semanticCandidatesExpression="aql:self.rewrites->select(r |  r.underInspection)">
+          <subItemMappings name="Rewrite" domainClass="queryrewriter.Rewrite" semanticCandidatesExpression="aql:self.getAllRewrites()->select(r |  r.underInspection and not r.tested)">
             <defaultStyle labelSize="10" showIcon="false" labelExpression="[self.old + '->' + self.new +  ' (' + self.occurrences->size() + ')'/]">
               <labelFormat>strike_through</labelFormat>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
@@ -145,14 +157,20 @@
                 </subItemMappings>
               </subItemMappings>
             </subItemMappings>
+            <create name="Apply Rewrite" elementsToSelect="service:stdEmptyCollection" mapping="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='Rewrites']/@subItemMappings[name='Rewrite']">
+              <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="service:applyRewrite()"/>
+              <variables name="root" documentation="The semantic element of the tree."/>
+              <variables name="element" documentation="The semantic currently edited element."/>
+              <variables name="container" documentation="The semantic element corresponding to the view container."/>
+            </create>
           </subItemMappings>
         </subItemMappings>
         <subItemMappings name="DONE" domainClass="queryrewriter.Configuration" semanticCandidatesExpression="var:self">
-          <defaultStyle labelExpression="aql:'Tested '  + self.rewrites->select(r | r.tested)->size()">
+          <defaultStyle labelExpression="aql:'Tested '  + self.getAllRewrites()->select(r | r.tested)->size()">
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
           </defaultStyle>
-          <subItemMappings name="TestedRewrite" domainClass="queryrewriter.Rewrite" semanticCandidatesExpression="aql:self.rewrites->select(r | r.tested)">
+          <subItemMappings name="TestedRewrite" domainClass="queryrewriter.Rewrite" semanticCandidatesExpression="aql:self.getAllRewrites()->select(r | r.tested)">
             <defaultStyle labelSize="10" showIcon="false" labelExpression="[self.old + '->' + self.new +  ' (' + self.occurrences->size() + ')'/]">
               <labelFormat>strike_through</labelFormat>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
@@ -217,11 +235,11 @@
           </subItemMappings>
         </subItemMappings>
         <subItemMappings name="No Occurrences" domainClass="queryrewriter.Configuration" semanticCandidatesExpression="var:self">
-          <defaultStyle labelExpression="aql: 'No Occurrences' + self.rewrites->select(r | r.occurrences->size() = 0)->size()">
+          <defaultStyle labelExpression="aql: 'No Occurrences' + self.getAllRewrites()->select(r | r.occurrences->size() = 0)->size()">
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
           </defaultStyle>
-          <subItemMappings name="No Occurrences" domainClass="queryrewriter.Rewrite" semanticCandidatesExpression="aql:self.rewrites->select(r | r.occurrences->size() = 0)">
+          <subItemMappings name="No Occurrences" domainClass="queryrewriter.Rewrite" semanticCandidatesExpression="aql:self.getAllRewrites()->select(r | r.occurrences->size() = 0)">
             <defaultStyle labelSize="10" showIcon="false" labelExpression="[self.old + '->' + self.new +  ' (' + self.occurrences->size() + ')'/]">
               <labelFormat>strike_through</labelFormat>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
@@ -285,57 +303,58 @@
             </subItemMappings>
           </subItemMappings>
         </subItemMappings>
-        <create name="Compute Rewrites" mapping="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='Rewrites']/@subItemMappings[name='Rewrite']">
+        <create name="Compute Rewrites" elementsToSelect="service:stdEmptyCollection" mapping="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='Rewrites']/@subItemMappings[name='Rewrite']">
           <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="service:computeOccurrences()"/>
           <variables name="root" documentation="The semantic element of the tree."/>
           <variables name="element" documentation="The semantic currently edited element."/>
           <variables name="container" documentation="The semantic element corresponding to the view container."/>
         </create>
-        <create name="Apply Rewrites" mapping="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='Rewrites']/@subItemMappings[name='Rewrite']">
+        <create name="Apply Rewrites" elementsToSelect="service:stdEmptyCollection" mapping="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='Rewrites']/@subItemMappings[name='Rewrite']">
           <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="service:applyRewrites()"/>
           <variables name="root" documentation="The semantic element of the tree."/>
           <variables name="element" documentation="The semantic currently edited element."/>
           <variables name="container" documentation="The semantic element corresponding to the view container."/>
         </create>
-        <create name="Reset Rewrites" mapping="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='Rewrites']/@subItemMappings[name='Rewrite']">
+        <create name="Reset Rewrites" elementsToSelect="service:stdEmptyCollection" mapping="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='Rewrites']/@subItemMappings[name='Rewrite']">
           <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="service:resetRewrites()"/>
           <variables name="root" documentation="The semantic element of the tree."/>
           <variables name="element" documentation="The semantic currently edited element."/>
           <variables name="container" documentation="The semantic element corresponding to the view container."/>
         </create>
-        <create name="Fill known rewrites" mapping="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='Rewrites']/@subItemMappings[name='Rewrite']">
+        <create name="Fill known rewrites" elementsToSelect="service:stdEmptyCollection" mapping="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='Rewrites']/@subItemMappings[name='Rewrite']">
           <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="service:fillKnownRewrites()"/>
           <variables name="root" documentation="The semantic element of the tree."/>
           <variables name="element" documentation="The semantic currently edited element."/>
           <variables name="container" documentation="The semantic element corresponding to the view container."/>
         </create>
-        <create name="Confirm rewrites under inspection" mapping="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='Rewrites']/@subItemMappings[name='Rewrite']">
+        <create name="Confirm rewrites under inspection" elementsToSelect="service:stdEmptyCollection" mapping="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='Rewrites']/@subItemMappings[name='Rewrite']">
           <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="service:confirmUnderInspection()"/>
           <variables name="root" documentation="The semantic element of the tree."/>
           <variables name="element" documentation="The semantic currently edited element."/>
           <variables name="container" documentation="The semantic element corresponding to the view container."/>
         </create>
-        <create name="Make non tested rewrites under inspection" mapping="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='Rewrites']/@subItemMappings[name='Rewrite']">
+        <create name="Make non tested rewrites under inspection" elementsToSelect="service:stdEmptyCollection" mapping="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='Rewrites']/@subItemMappings[name='Rewrite']">
           <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="service:makeNonTestedRewritesUnderInspection()"/>
           <variables name="root" documentation="The semantic element of the tree."/>
           <variables name="element" documentation="The semantic currently edited element."/>
           <variables name="container" documentation="The semantic element corresponding to the view container."/>
         </create>
-        <create name="Make all rewrites under inspection" mapping="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='Rewrites']/@subItemMappings[name='Rewrite']">
+        <create name="Make all rewrites under inspection" elementsToSelect="service:stdEmptyCollection" mapping="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']/@subItemMappings[name='Rewrites']/@subItemMappings[name='Rewrite']">
           <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="service:makeAllUnderInspection()"/>
           <variables name="root" documentation="The semantic element of the tree."/>
           <variables name="element" documentation="The semantic currently edited element."/>
           <variables name="container" documentation="The semantic element corresponding to the view container."/>
         </create>
+        <create name="Load Groups" mapping="//@ownedViewpoints[name='QueryRewriter']/@ownedRepresentations[name='Configuration']/@subItemMappings[name='Configuration']">
+          <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="service:loadGroups()"/>
+          <variables name="root" documentation="The semantic element of the tree."/>
+          <variables name="element" documentation="The currently edited element."/>
+          <variables name="container" documentation="The semantic element corresponding to the view container."/>
+        </create>
       </subItemMappings>
-    </ownedRepresentations>
-    <ownedRepresentations xsi:type="description_2:EditionTableDescription" name="Rewrites" domainClass="queryrewriter.Configuration">
-      <metamodel href="http://www.eclipse.org/sirius/queryrewriter#/"/>
-      <ownedLineMappings name="Rewrite" domainClass="queryrewriter.Rewrite"/>
-      <ownedColumnMappings name="new" headerLabelExpression="new" featureName="new" labelExpression="feature:new"/>
-      <ownedColumnMappings name="total" headerLabelExpression="occurrences" featureName="old" labelExpression="[self.occurrences->size()/]"/>
     </ownedRepresentations>
     <ownedJavaExtensions qualifiedClassName="org.eclipse.sirius.queryrewriter.RewriterServices"/>
     <ownedJavaExtensions qualifiedClassName="org.eclipse.sirius.queryrewriter.design.services.QueryRewriterServices"/>
+    <ownedJavaExtensions qualifiedClassName="org.eclipse.sirius.common.tools.api.interpreter.StandardServices"/>
   </ownedViewpoints>
 </description:Group>

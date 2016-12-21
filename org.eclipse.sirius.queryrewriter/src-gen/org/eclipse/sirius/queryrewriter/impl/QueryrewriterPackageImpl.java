@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.sirius.queryrewriter.Configuration;
+import org.eclipse.sirius.queryrewriter.NameRewrite;
 import org.eclipse.sirius.queryrewriter.Occurrence;
 import org.eclipse.sirius.queryrewriter.QueryLanguage;
 import org.eclipse.sirius.queryrewriter.QueryrewriterFactory;
@@ -49,6 +50,13 @@ public class QueryrewriterPackageImpl extends EPackageImpl implements Queryrewri
 	 * @generated
 	 */
 	private EClass occurrenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass nameRewriteEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -180,6 +188,33 @@ public class QueryrewriterPackageImpl extends EPackageImpl implements Queryrewri
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getConfiguration_IncludedConfigurations() {
+		return (EReference)configurationEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getConfiguration_NameRewrites() {
+		return (EReference)configurationEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getConfiguration_ManualGroups() {
+		return (EReference)configurationEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getRewrite() {
 		return rewriteEClass;
 	}
@@ -261,6 +296,33 @@ public class QueryrewriterPackageImpl extends EPackageImpl implements Queryrewri
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getNameRewrite() {
+		return nameRewriteEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getNameRewrite_Old() {
+		return (EAttribute)nameRewriteEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getNameRewrite_New() {
+		return (EAttribute)nameRewriteEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getQueryLanguage() {
 		return queryLanguageEEnum;
 	}
@@ -299,6 +361,9 @@ public class QueryrewriterPackageImpl extends EPackageImpl implements Queryrewri
 		createEReference(configurationEClass, CONFIGURATION__REWRITES);
 		createEAttribute(configurationEClass, CONFIGURATION__LANGUAGES_TO_REWRITE);
 		createEAttribute(configurationEClass, CONFIGURATION__AUTO_FILL);
+		createEReference(configurationEClass, CONFIGURATION__INCLUDED_CONFIGURATIONS);
+		createEReference(configurationEClass, CONFIGURATION__NAME_REWRITES);
+		createEReference(configurationEClass, CONFIGURATION__MANUAL_GROUPS);
 
 		rewriteEClass = createEClass(REWRITE);
 		createEAttribute(rewriteEClass, REWRITE__OLD);
@@ -310,6 +375,10 @@ public class QueryrewriterPackageImpl extends EPackageImpl implements Queryrewri
 		occurrenceEClass = createEClass(OCCURRENCE);
 		createEReference(occurrenceEClass, OCCURRENCE__EATTRIBUTE);
 		createEReference(occurrenceEClass, OCCURRENCE__VSM_ELEMENT);
+
+		nameRewriteEClass = createEClass(NAME_REWRITE);
+		createEAttribute(nameRewriteEClass, NAME_REWRITE__OLD);
+		createEAttribute(nameRewriteEClass, NAME_REWRITE__NEW);
 
 		// Create enums
 		queryLanguageEEnum = createEEnum(QUERY_LANGUAGE);
@@ -355,17 +424,24 @@ public class QueryrewriterPackageImpl extends EPackageImpl implements Queryrewri
 		initEReference(getConfiguration_Rewrites(), this.getRewrite(), null, "rewrites", null, 0, -1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getConfiguration_LanguagesToRewrite(), this.getQueryLanguage(), "languagesToRewrite", null, 0, -1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getConfiguration_AutoFill(), theEcorePackage.getEString(), "autoFill", null, 0, 1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConfiguration_IncludedConfigurations(), this.getConfiguration(), null, "includedConfigurations", null, 0, -1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConfiguration_NameRewrites(), this.getNameRewrite(), null, "nameRewrites", null, 0, -1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConfiguration_ManualGroups(), theDescriptionPackage.getGroup(), null, "manualGroups", null, 0, -1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(rewriteEClass, Rewrite.class, "Rewrite", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRewrite_Old(), theDescriptionPackage.getInterpretedExpression(), "old", null, 0, 1, Rewrite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRewrite_New(), theDescriptionPackage.getInterpretedExpression(), "new", null, 0, 1, Rewrite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRewrite_Occurrences(), this.getOccurrence(), null, "occurrences", null, 0, -1, Rewrite.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getRewrite_UnderInspection(), theEcorePackage.getEBoolean(), "underInspection", "true", 0, 1, Rewrite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRewrite_UnderInspection(), theEcorePackage.getEBoolean(), "underInspection", "", 0, 1, Rewrite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRewrite_Tested(), theEcorePackage.getEBoolean(), "tested", null, 0, 1, Rewrite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(occurrenceEClass, Occurrence.class, "Occurrence", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOccurrence_Eattribute(), theEcorePackage.getEAttribute(), null, "eattribute", null, 0, 1, Occurrence.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOccurrence_VsmElement(), theEcorePackage.getEObject(), null, "vsmElement", null, 0, 1, Occurrence.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(nameRewriteEClass, NameRewrite.class, "NameRewrite", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getNameRewrite_Old(), theEcorePackage.getEString(), "old", null, 0, 1, NameRewrite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getNameRewrite_New(), theEcorePackage.getEString(), "new", null, 0, 1, NameRewrite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(queryLanguageEEnum, QueryLanguage.class, "QueryLanguage");

@@ -113,13 +113,40 @@ public interface QueryrewriterPackage extends EPackage {
 	int CONFIGURATION__AUTO_FILL = 4;
 
 	/**
+	 * The feature id for the '<em><b>Included Configurations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIGURATION__INCLUDED_CONFIGURATIONS = 5;
+
+	/**
+	 * The feature id for the '<em><b>Name Rewrites</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIGURATION__NAME_REWRITES = 6;
+
+	/**
+	 * The feature id for the '<em><b>Manual Groups</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIGURATION__MANUAL_GROUPS = 7;
+
+	/**
 	 * The number of structural features of the '<em>Configuration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONFIGURATION_FEATURE_COUNT = 5;
+	int CONFIGURATION_FEATURE_COUNT = 8;
 
 	/**
 	 * The number of operations of the '<em>Configuration</em>' class.
@@ -250,6 +277,52 @@ public interface QueryrewriterPackage extends EPackage {
 	int OCCURRENCE_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.sirius.queryrewriter.impl.NameRewriteImpl <em>Name Rewrite</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.sirius.queryrewriter.impl.NameRewriteImpl
+	 * @see org.eclipse.sirius.queryrewriter.impl.QueryrewriterPackageImpl#getNameRewrite()
+	 * @generated
+	 */
+	int NAME_REWRITE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Old</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAME_REWRITE__OLD = 0;
+
+	/**
+	 * The feature id for the '<em><b>New</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAME_REWRITE__NEW = 1;
+
+	/**
+	 * The number of structural features of the '<em>Name Rewrite</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAME_REWRITE_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Name Rewrite</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAME_REWRITE_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.sirius.queryrewriter.QueryLanguage <em>Query Language</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -257,7 +330,7 @@ public interface QueryrewriterPackage extends EPackage {
 	 * @see org.eclipse.sirius.queryrewriter.impl.QueryrewriterPackageImpl#getQueryLanguage()
 	 * @generated
 	 */
-	int QUERY_LANGUAGE = 3;
+	int QUERY_LANGUAGE = 4;
 
 
 	/**
@@ -324,6 +397,39 @@ public interface QueryrewriterPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getConfiguration_AutoFill();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.sirius.queryrewriter.Configuration#getIncludedConfigurations <em>Included Configurations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Included Configurations</em>'.
+	 * @see org.eclipse.sirius.queryrewriter.Configuration#getIncludedConfigurations()
+	 * @see #getConfiguration()
+	 * @generated
+	 */
+	EReference getConfiguration_IncludedConfigurations();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.sirius.queryrewriter.Configuration#getNameRewrites <em>Name Rewrites</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Name Rewrites</em>'.
+	 * @see org.eclipse.sirius.queryrewriter.Configuration#getNameRewrites()
+	 * @see #getConfiguration()
+	 * @generated
+	 */
+	EReference getConfiguration_NameRewrites();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.sirius.queryrewriter.Configuration#getManualGroups <em>Manual Groups</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Manual Groups</em>'.
+	 * @see org.eclipse.sirius.queryrewriter.Configuration#getManualGroups()
+	 * @see #getConfiguration()
+	 * @generated
+	 */
+	EReference getConfiguration_ManualGroups();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.sirius.queryrewriter.Rewrite <em>Rewrite</em>}'.
@@ -423,6 +529,38 @@ public interface QueryrewriterPackage extends EPackage {
 	EReference getOccurrence_VsmElement();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.sirius.queryrewriter.NameRewrite <em>Name Rewrite</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Name Rewrite</em>'.
+	 * @see org.eclipse.sirius.queryrewriter.NameRewrite
+	 * @generated
+	 */
+	EClass getNameRewrite();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.sirius.queryrewriter.NameRewrite#getOld <em>Old</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Old</em>'.
+	 * @see org.eclipse.sirius.queryrewriter.NameRewrite#getOld()
+	 * @see #getNameRewrite()
+	 * @generated
+	 */
+	EAttribute getNameRewrite_Old();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.sirius.queryrewriter.NameRewrite#getNew <em>New</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>New</em>'.
+	 * @see org.eclipse.sirius.queryrewriter.NameRewrite#getNew()
+	 * @see #getNameRewrite()
+	 * @generated
+	 */
+	EAttribute getNameRewrite_New();
+
+	/**
 	 * Returns the meta object for enum '{@link org.eclipse.sirius.queryrewriter.QueryLanguage <em>Query Language</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -506,6 +644,30 @@ public interface QueryrewriterPackage extends EPackage {
 		EAttribute CONFIGURATION__AUTO_FILL = eINSTANCE.getConfiguration_AutoFill();
 
 		/**
+		 * The meta object literal for the '<em><b>Included Configurations</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONFIGURATION__INCLUDED_CONFIGURATIONS = eINSTANCE.getConfiguration_IncludedConfigurations();
+
+		/**
+		 * The meta object literal for the '<em><b>Name Rewrites</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONFIGURATION__NAME_REWRITES = eINSTANCE.getConfiguration_NameRewrites();
+
+		/**
+		 * The meta object literal for the '<em><b>Manual Groups</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONFIGURATION__MANUAL_GROUPS = eINSTANCE.getConfiguration_ManualGroups();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.sirius.queryrewriter.impl.RewriteImpl <em>Rewrite</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -580,6 +742,32 @@ public interface QueryrewriterPackage extends EPackage {
 		 * @generated
 		 */
 		EReference OCCURRENCE__VSM_ELEMENT = eINSTANCE.getOccurrence_VsmElement();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.sirius.queryrewriter.impl.NameRewriteImpl <em>Name Rewrite</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.sirius.queryrewriter.impl.NameRewriteImpl
+		 * @see org.eclipse.sirius.queryrewriter.impl.QueryrewriterPackageImpl#getNameRewrite()
+		 * @generated
+		 */
+		EClass NAME_REWRITE = eINSTANCE.getNameRewrite();
+
+		/**
+		 * The meta object literal for the '<em><b>Old</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NAME_REWRITE__OLD = eINSTANCE.getNameRewrite_Old();
+
+		/**
+		 * The meta object literal for the '<em><b>New</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NAME_REWRITE__NEW = eINSTANCE.getNameRewrite_New();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.sirius.queryrewriter.QueryLanguage <em>Query Language</em>}' enum.

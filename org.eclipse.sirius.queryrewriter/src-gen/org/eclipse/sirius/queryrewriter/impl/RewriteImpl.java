@@ -98,7 +98,7 @@ public class RewriteImpl extends MinimalEObjectImpl.Container implements Rewrite
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean UNDER_INSPECTION_EDEFAULT = true;
+	protected static final boolean UNDER_INSPECTION_EDEFAULT = false;
 
 	/**
 	 * The cached value of the '{@link #isUnderInspection() <em>Under Inspection</em>}' attribute.

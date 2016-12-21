@@ -67,6 +67,8 @@ public class ConfigurationItemProvider
 			addAccessibleGroupsPropertyDescriptor(object);
 			addLanguagesToRewritePropertyDescriptor(object);
 			addAutoFillPropertyDescriptor(object);
+			addIncludedConfigurationsPropertyDescriptor(object);
+			addManualGroupsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -160,6 +162,50 @@ public class ConfigurationItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Included Configurations feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addIncludedConfigurationsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Configuration_includedConfigurations_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Configuration_includedConfigurations_feature", "_UI_Configuration_type"),
+				 QueryrewriterPackage.Literals.CONFIGURATION__INCLUDED_CONFIGURATIONS,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Manual Groups feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addManualGroupsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Configuration_manualGroups_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Configuration_manualGroups_feature", "_UI_Configuration_type"),
+				 QueryrewriterPackage.Literals.CONFIGURATION__MANUAL_GROUPS,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -172,6 +218,7 @@ public class ConfigurationItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(QueryrewriterPackage.Literals.CONFIGURATION__REWRITES);
+			childrenFeatures.add(QueryrewriterPackage.Literals.CONFIGURATION__NAME_REWRITES);
 		}
 		return childrenFeatures;
 	}
@@ -243,6 +290,7 @@ public class ConfigurationItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case QueryrewriterPackage.CONFIGURATION__REWRITES:
+			case QueryrewriterPackage.CONFIGURATION__NAME_REWRITES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -264,6 +312,11 @@ public class ConfigurationItemProvider
 			(createChildParameter
 				(QueryrewriterPackage.Literals.CONFIGURATION__REWRITES,
 				 QueryrewriterFactory.eINSTANCE.createRewrite()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(QueryrewriterPackage.Literals.CONFIGURATION__NAME_REWRITES,
+				 QueryrewriterFactory.eINSTANCE.createNameRewrite()));
 	}
 
 	/**

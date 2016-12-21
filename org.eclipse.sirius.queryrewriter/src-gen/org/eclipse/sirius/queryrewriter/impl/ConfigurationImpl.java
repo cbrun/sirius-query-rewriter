@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.sirius.queryrewriter.Configuration;
+import org.eclipse.sirius.queryrewriter.NameRewrite;
 import org.eclipse.sirius.queryrewriter.QueryLanguage;
 import org.eclipse.sirius.queryrewriter.QueryrewriterPackage;
 import org.eclipse.sirius.queryrewriter.Rewrite;
@@ -40,6 +41,9 @@ import org.eclipse.sirius.viewpoint.description.Group;
  *   <li>{@link org.eclipse.sirius.queryrewriter.impl.ConfigurationImpl#getRewrites <em>Rewrites</em>}</li>
  *   <li>{@link org.eclipse.sirius.queryrewriter.impl.ConfigurationImpl#getLanguagesToRewrite <em>Languages To Rewrite</em>}</li>
  *   <li>{@link org.eclipse.sirius.queryrewriter.impl.ConfigurationImpl#getAutoFill <em>Auto Fill</em>}</li>
+ *   <li>{@link org.eclipse.sirius.queryrewriter.impl.ConfigurationImpl#getIncludedConfigurations <em>Included Configurations</em>}</li>
+ *   <li>{@link org.eclipse.sirius.queryrewriter.impl.ConfigurationImpl#getNameRewrites <em>Name Rewrites</em>}</li>
+ *   <li>{@link org.eclipse.sirius.queryrewriter.impl.ConfigurationImpl#getManualGroups <em>Manual Groups</em>}</li>
  * </ul>
  *
  * @generated
@@ -104,6 +108,36 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	 * @ordered
 	 */
 	protected String autoFill = AUTO_FILL_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getIncludedConfigurations() <em>Included Configurations</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIncludedConfigurations()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Configuration> includedConfigurations;
+
+	/**
+	 * The cached value of the '{@link #getNameRewrites() <em>Name Rewrites</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNameRewrites()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<NameRewrite> nameRewrites;
+
+	/**
+	 * The cached value of the '{@link #getManualGroups() <em>Manual Groups</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getManualGroups()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Group> manualGroups;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -198,11 +232,49 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Configuration> getIncludedConfigurations() {
+		if (includedConfigurations == null) {
+			includedConfigurations = new EObjectResolvingEList<Configuration>(Configuration.class, this, QueryrewriterPackage.CONFIGURATION__INCLUDED_CONFIGURATIONS);
+		}
+		return includedConfigurations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<NameRewrite> getNameRewrites() {
+		if (nameRewrites == null) {
+			nameRewrites = new EObjectContainmentEList<NameRewrite>(NameRewrite.class, this, QueryrewriterPackage.CONFIGURATION__NAME_REWRITES);
+		}
+		return nameRewrites;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Group> getManualGroups() {
+		if (manualGroups == null) {
+			manualGroups = new EObjectResolvingEList<Group>(Group.class, this, QueryrewriterPackage.CONFIGURATION__MANUAL_GROUPS);
+		}
+		return manualGroups;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case QueryrewriterPackage.CONFIGURATION__REWRITES:
 				return ((InternalEList<?>)getRewrites()).basicRemove(otherEnd, msgs);
+			case QueryrewriterPackage.CONFIGURATION__NAME_REWRITES:
+				return ((InternalEList<?>)getNameRewrites()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -225,6 +297,12 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 				return getLanguagesToRewrite();
 			case QueryrewriterPackage.CONFIGURATION__AUTO_FILL:
 				return getAutoFill();
+			case QueryrewriterPackage.CONFIGURATION__INCLUDED_CONFIGURATIONS:
+				return getIncludedConfigurations();
+			case QueryrewriterPackage.CONFIGURATION__NAME_REWRITES:
+				return getNameRewrites();
+			case QueryrewriterPackage.CONFIGURATION__MANUAL_GROUPS:
+				return getManualGroups();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -257,6 +335,18 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 			case QueryrewriterPackage.CONFIGURATION__AUTO_FILL:
 				setAutoFill((String)newValue);
 				return;
+			case QueryrewriterPackage.CONFIGURATION__INCLUDED_CONFIGURATIONS:
+				getIncludedConfigurations().clear();
+				getIncludedConfigurations().addAll((Collection<? extends Configuration>)newValue);
+				return;
+			case QueryrewriterPackage.CONFIGURATION__NAME_REWRITES:
+				getNameRewrites().clear();
+				getNameRewrites().addAll((Collection<? extends NameRewrite>)newValue);
+				return;
+			case QueryrewriterPackage.CONFIGURATION__MANUAL_GROUPS:
+				getManualGroups().clear();
+				getManualGroups().addAll((Collection<? extends Group>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -284,6 +374,15 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 			case QueryrewriterPackage.CONFIGURATION__AUTO_FILL:
 				setAutoFill(AUTO_FILL_EDEFAULT);
 				return;
+			case QueryrewriterPackage.CONFIGURATION__INCLUDED_CONFIGURATIONS:
+				getIncludedConfigurations().clear();
+				return;
+			case QueryrewriterPackage.CONFIGURATION__NAME_REWRITES:
+				getNameRewrites().clear();
+				return;
+			case QueryrewriterPackage.CONFIGURATION__MANUAL_GROUPS:
+				getManualGroups().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -306,6 +405,12 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 				return languagesToRewrite != null && !languagesToRewrite.isEmpty();
 			case QueryrewriterPackage.CONFIGURATION__AUTO_FILL:
 				return AUTO_FILL_EDEFAULT == null ? autoFill != null : !AUTO_FILL_EDEFAULT.equals(autoFill);
+			case QueryrewriterPackage.CONFIGURATION__INCLUDED_CONFIGURATIONS:
+				return includedConfigurations != null && !includedConfigurations.isEmpty();
+			case QueryrewriterPackage.CONFIGURATION__NAME_REWRITES:
+				return nameRewrites != null && !nameRewrites.isEmpty();
+			case QueryrewriterPackage.CONFIGURATION__MANUAL_GROUPS:
+				return manualGroups != null && !manualGroups.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

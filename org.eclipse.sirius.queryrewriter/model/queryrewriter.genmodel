@@ -25,6 +25,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference queryrewriter.ecore#//Configuration/rewrites"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute queryrewriter.ecore#//Configuration/languagesToRewrite"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute queryrewriter.ecore#//Configuration/autoFill"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference queryrewriter.ecore#//Configuration/includedConfigurations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference queryrewriter.ecore#//Configuration/nameRewrites"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference queryrewriter.ecore#//Configuration/manualGroups"/>
     </genClasses>
     <genClasses ecoreClass="queryrewriter.ecore#//Rewrite">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute queryrewriter.ecore#//Rewrite/old"/>
@@ -36,6 +39,10 @@
     <genClasses ecoreClass="queryrewriter.ecore#//Occurrence">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference queryrewriter.ecore#//Occurrence/eattribute"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference queryrewriter.ecore#//Occurrence/vsmElement"/>
+    </genClasses>
+    <genClasses ecoreClass="queryrewriter.ecore#//NameRewrite">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute queryrewriter.ecore#//NameRewrite/old"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute queryrewriter.ecore#//NameRewrite/new"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

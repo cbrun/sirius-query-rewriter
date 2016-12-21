@@ -141,6 +141,29 @@ public class QueryrewriterItemProviderAdapterFactory extends QueryrewriterAdapte
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.sirius.queryrewriter.NameRewrite} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected NameRewriteItemProvider nameRewriteItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.sirius.queryrewriter.NameRewrite}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createNameRewriteAdapter() {
+		if (nameRewriteItemProvider == null) {
+			nameRewriteItemProvider = new NameRewriteItemProvider(this);
+		}
+
+		return nameRewriteItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -242,6 +265,7 @@ public class QueryrewriterItemProviderAdapterFactory extends QueryrewriterAdapte
 		if (configurationItemProvider != null) configurationItemProvider.dispose();
 		if (rewriteItemProvider != null) rewriteItemProvider.dispose();
 		if (occurrenceItemProvider != null) occurrenceItemProvider.dispose();
+		if (nameRewriteItemProvider != null) nameRewriteItemProvider.dispose();
 	}
 
 }

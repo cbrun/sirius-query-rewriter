@@ -97,7 +97,7 @@ public interface Rewrite extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Under Inspection</b></em>' attribute.
-	 * The default value is <code>"true"</code>.
+	 * The default value is <code>""</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Under Inspection</em>' attribute isn't clear,
@@ -107,7 +107,7 @@ public interface Rewrite extends EObject {
 	 * @return the value of the '<em>Under Inspection</em>' attribute.
 	 * @see #setUnderInspection(boolean)
 	 * @see org.eclipse.sirius.queryrewriter.QueryrewriterPackage#getRewrite_UnderInspection()
-	 * @model default="true"
+	 * @model default=""
 	 * @generated
 	 */
 	boolean isUnderInspection();
