@@ -95,6 +95,29 @@ public class QueryrewriterItemProviderAdapterFactory extends QueryrewriterAdapte
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.sirius.queryrewriter.Tag} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TagItemProvider tagItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.sirius.queryrewriter.Tag}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTagAdapter() {
+		if (tagItemProvider == null) {
+			tagItemProvider = new TagItemProvider(this);
+		}
+
+		return tagItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.eclipse.sirius.queryrewriter.Rewrite} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -263,6 +286,7 @@ public class QueryrewriterItemProviderAdapterFactory extends QueryrewriterAdapte
 	 */
 	public void dispose() {
 		if (configurationItemProvider != null) configurationItemProvider.dispose();
+		if (tagItemProvider != null) tagItemProvider.dispose();
 		if (rewriteItemProvider != null) rewriteItemProvider.dispose();
 		if (occurrenceItemProvider != null) occurrenceItemProvider.dispose();
 		if (nameRewriteItemProvider != null) nameRewriteItemProvider.dispose();

@@ -19,6 +19,7 @@ import org.eclipse.sirius.queryrewriter.QueryrewriterFactory;
 import org.eclipse.sirius.queryrewriter.QueryrewriterPackage;
 import org.eclipse.sirius.queryrewriter.Rewrite;
 
+import org.eclipse.sirius.queryrewriter.Tag;
 import org.eclipse.sirius.viewpoint.ViewpointPackage;
 
 import org.eclipse.sirius.viewpoint.description.DescriptionPackage;
@@ -36,6 +37,13 @@ public class QueryrewriterPackageImpl extends EPackageImpl implements Queryrewri
 	 * @generated
 	 */
 	private EClass configurationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass tagEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -215,6 +223,42 @@ public class QueryrewriterPackageImpl extends EPackageImpl implements Queryrewri
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getConfiguration_Tags() {
+		return (EReference)configurationEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTag() {
+		return tagEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTag_Name() {
+		return (EAttribute)tagEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTag_Description() {
+		return (EAttribute)tagEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getRewrite() {
 		return rewriteEClass;
 	}
@@ -262,6 +306,15 @@ public class QueryrewriterPackageImpl extends EPackageImpl implements Queryrewri
 	 */
 	public EAttribute getRewrite_Tested() {
 		return (EAttribute)rewriteEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRewrite_Tags() {
+		return (EReference)rewriteEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -364,6 +417,11 @@ public class QueryrewriterPackageImpl extends EPackageImpl implements Queryrewri
 		createEReference(configurationEClass, CONFIGURATION__INCLUDED_CONFIGURATIONS);
 		createEReference(configurationEClass, CONFIGURATION__NAME_REWRITES);
 		createEReference(configurationEClass, CONFIGURATION__MANUAL_GROUPS);
+		createEReference(configurationEClass, CONFIGURATION__TAGS);
+
+		tagEClass = createEClass(TAG);
+		createEAttribute(tagEClass, TAG__NAME);
+		createEAttribute(tagEClass, TAG__DESCRIPTION);
 
 		rewriteEClass = createEClass(REWRITE);
 		createEAttribute(rewriteEClass, REWRITE__OLD);
@@ -371,6 +429,7 @@ public class QueryrewriterPackageImpl extends EPackageImpl implements Queryrewri
 		createEReference(rewriteEClass, REWRITE__OCCURRENCES);
 		createEAttribute(rewriteEClass, REWRITE__UNDER_INSPECTION);
 		createEAttribute(rewriteEClass, REWRITE__TESTED);
+		createEReference(rewriteEClass, REWRITE__TAGS);
 
 		occurrenceEClass = createEClass(OCCURRENCE);
 		createEReference(occurrenceEClass, OCCURRENCE__EATTRIBUTE);
@@ -427,13 +486,19 @@ public class QueryrewriterPackageImpl extends EPackageImpl implements Queryrewri
 		initEReference(getConfiguration_IncludedConfigurations(), this.getConfiguration(), null, "includedConfigurations", null, 0, -1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getConfiguration_NameRewrites(), this.getNameRewrite(), null, "nameRewrites", null, 0, -1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getConfiguration_ManualGroups(), theDescriptionPackage.getGroup(), null, "manualGroups", null, 0, -1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConfiguration_Tags(), this.getTag(), null, "tags", null, 0, -1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(tagEClass, Tag.class, "Tag", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTag_Name(), theEcorePackage.getEString(), "name", null, 1, 1, Tag.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTag_Description(), theEcorePackage.getEString(), "description", null, 0, 1, Tag.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(rewriteEClass, Rewrite.class, "Rewrite", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRewrite_Old(), theDescriptionPackage.getInterpretedExpression(), "old", null, 0, 1, Rewrite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRewrite_New(), theDescriptionPackage.getInterpretedExpression(), "new", null, 0, 1, Rewrite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRewrite_Occurrences(), this.getOccurrence(), null, "occurrences", null, 0, -1, Rewrite.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getRewrite_UnderInspection(), theEcorePackage.getEBoolean(), "underInspection", "", 0, 1, Rewrite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRewrite_UnderInspection(), ecorePackage.getEBoolean(), "underInspection", "false", 0, 1, Rewrite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRewrite_Tested(), theEcorePackage.getEBoolean(), "tested", null, 0, 1, Rewrite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRewrite_Tags(), this.getTag(), null, "tags", null, 0, -1, Rewrite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(occurrenceEClass, Occurrence.class, "Occurrence", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOccurrence_Eattribute(), theEcorePackage.getEAttribute(), null, "eattribute", null, 0, 1, Occurrence.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

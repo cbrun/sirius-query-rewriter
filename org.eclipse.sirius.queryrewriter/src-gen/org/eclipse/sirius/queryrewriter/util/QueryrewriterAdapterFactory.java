@@ -72,6 +72,10 @@ public class QueryrewriterAdapterFactory extends AdapterFactoryImpl {
 				return createConfigurationAdapter();
 			}
 			@Override
+			public Adapter caseTag(Tag object) {
+				return createTagAdapter();
+			}
+			@Override
 			public Adapter caseRewrite(Rewrite object) {
 				return createRewriteAdapter();
 			}
@@ -114,6 +118,20 @@ public class QueryrewriterAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createConfigurationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.queryrewriter.Tag <em>Tag</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.sirius.queryrewriter.Tag
+	 * @generated
+	 */
+	public Adapter createTagAdapter() {
 		return null;
 	}
 

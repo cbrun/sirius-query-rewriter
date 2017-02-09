@@ -58,6 +58,7 @@ public class QueryrewriterFactoryImpl extends EFactoryImpl implements Queryrewri
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case QueryrewriterPackage.CONFIGURATION: return createConfiguration();
+			case QueryrewriterPackage.TAG: return createTag();
 			case QueryrewriterPackage.REWRITE: return createRewrite();
 			case QueryrewriterPackage.OCCURRENCE: return createOccurrence();
 			case QueryrewriterPackage.NAME_REWRITE: return createNameRewrite();
@@ -104,6 +105,16 @@ public class QueryrewriterFactoryImpl extends EFactoryImpl implements Queryrewri
 	public Configuration createConfiguration() {
 		ConfigurationImpl configuration = new ConfigurationImpl();
 		return configuration;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Tag createTag() {
+		TagImpl tag = new TagImpl();
+		return tag;
 	}
 
 	/**

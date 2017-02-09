@@ -28,6 +28,11 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference queryrewriter.ecore#//Configuration/includedConfigurations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference queryrewriter.ecore#//Configuration/nameRewrites"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference queryrewriter.ecore#//Configuration/manualGroups"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference queryrewriter.ecore#//Configuration/tags"/>
+    </genClasses>
+    <genClasses ecoreClass="queryrewriter.ecore#//Tag">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute queryrewriter.ecore#//Tag/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute queryrewriter.ecore#//Tag/description"/>
     </genClasses>
     <genClasses ecoreClass="queryrewriter.ecore#//Rewrite">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute queryrewriter.ecore#//Rewrite/old"/>
@@ -35,6 +40,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference queryrewriter.ecore#//Rewrite/occurrences"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute queryrewriter.ecore#//Rewrite/underInspection"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute queryrewriter.ecore#//Rewrite/tested"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference queryrewriter.ecore#//Rewrite/tags"/>
     </genClasses>
     <genClasses ecoreClass="queryrewriter.ecore#//Occurrence">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference queryrewriter.ecore#//Occurrence/eattribute"/>

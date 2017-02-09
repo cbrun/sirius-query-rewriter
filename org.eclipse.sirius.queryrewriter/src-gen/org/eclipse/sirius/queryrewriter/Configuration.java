@@ -25,6 +25,7 @@ import org.eclipse.sirius.viewpoint.description.Group;
  *   <li>{@link org.eclipse.sirius.queryrewriter.Configuration#getIncludedConfigurations <em>Included Configurations</em>}</li>
  *   <li>{@link org.eclipse.sirius.queryrewriter.Configuration#getNameRewrites <em>Name Rewrites</em>}</li>
  *   <li>{@link org.eclipse.sirius.queryrewriter.Configuration#getManualGroups <em>Manual Groups</em>}</li>
+ *   <li>{@link org.eclipse.sirius.queryrewriter.Configuration#getTags <em>Tags</em>}</li>
  * </ul>
  *
  * @see org.eclipse.sirius.queryrewriter.QueryrewriterPackage#getConfiguration()
@@ -171,5 +172,21 @@ public interface Configuration extends EObject {
 	 * @generated
 	 */
 	EList<Group> getManualGroups();
+
+	/**
+	 * Returns the value of the '<em><b>Tags</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.sirius.queryrewriter.Tag}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Tags</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Tags</em>' containment reference list.
+	 * @see org.eclipse.sirius.queryrewriter.QueryrewriterPackage#getConfiguration_Tags()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Tag> getTags();
 
 } // Configuration

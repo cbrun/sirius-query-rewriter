@@ -67,6 +67,7 @@ public class RewriteItemProvider
 			addNewPropertyDescriptor(object);
 			addUnderInspectionPropertyDescriptor(object);
 			addTestedPropertyDescriptor(object);
+			addTagsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -155,6 +156,28 @@ public class RewriteItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Tags feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTagsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Rewrite_tags_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Rewrite_tags_feature", "_UI_Rewrite_type"),
+				 QueryrewriterPackage.Literals.REWRITE__TAGS,
+				 true,
+				 false,
+				 true,
+				 null,
 				 null,
 				 null));
 	}

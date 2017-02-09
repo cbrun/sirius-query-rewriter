@@ -140,13 +140,22 @@ public interface QueryrewriterPackage extends EPackage {
 	int CONFIGURATION__MANUAL_GROUPS = 7;
 
 	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIGURATION__TAGS = 8;
+
+	/**
 	 * The number of structural features of the '<em>Configuration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONFIGURATION_FEATURE_COUNT = 8;
+	int CONFIGURATION_FEATURE_COUNT = 9;
 
 	/**
 	 * The number of operations of the '<em>Configuration</em>' class.
@@ -158,6 +167,52 @@ public interface QueryrewriterPackage extends EPackage {
 	int CONFIGURATION_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.sirius.queryrewriter.impl.TagImpl <em>Tag</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.sirius.queryrewriter.impl.TagImpl
+	 * @see org.eclipse.sirius.queryrewriter.impl.QueryrewriterPackageImpl#getTag()
+	 * @generated
+	 */
+	int TAG = 1;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TAG__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TAG__DESCRIPTION = 1;
+
+	/**
+	 * The number of structural features of the '<em>Tag</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TAG_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Tag</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TAG_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.sirius.queryrewriter.impl.RewriteImpl <em>Rewrite</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -165,7 +220,7 @@ public interface QueryrewriterPackage extends EPackage {
 	 * @see org.eclipse.sirius.queryrewriter.impl.QueryrewriterPackageImpl#getRewrite()
 	 * @generated
 	 */
-	int REWRITE = 1;
+	int REWRITE = 2;
 
 	/**
 	 * The feature id for the '<em><b>Old</b></em>' attribute.
@@ -213,13 +268,22 @@ public interface QueryrewriterPackage extends EPackage {
 	int REWRITE__TESTED = 4;
 
 	/**
+	 * The feature id for the '<em><b>Tags</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REWRITE__TAGS = 5;
+
+	/**
 	 * The number of structural features of the '<em>Rewrite</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REWRITE_FEATURE_COUNT = 5;
+	int REWRITE_FEATURE_COUNT = 6;
 
 	/**
 	 * The number of operations of the '<em>Rewrite</em>' class.
@@ -238,7 +302,7 @@ public interface QueryrewriterPackage extends EPackage {
 	 * @see org.eclipse.sirius.queryrewriter.impl.QueryrewriterPackageImpl#getOccurrence()
 	 * @generated
 	 */
-	int OCCURRENCE = 2;
+	int OCCURRENCE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Eattribute</b></em>' reference.
@@ -284,7 +348,7 @@ public interface QueryrewriterPackage extends EPackage {
 	 * @see org.eclipse.sirius.queryrewriter.impl.QueryrewriterPackageImpl#getNameRewrite()
 	 * @generated
 	 */
-	int NAME_REWRITE = 3;
+	int NAME_REWRITE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Old</b></em>' attribute.
@@ -330,7 +394,7 @@ public interface QueryrewriterPackage extends EPackage {
 	 * @see org.eclipse.sirius.queryrewriter.impl.QueryrewriterPackageImpl#getQueryLanguage()
 	 * @generated
 	 */
-	int QUERY_LANGUAGE = 4;
+	int QUERY_LANGUAGE = 5;
 
 
 	/**
@@ -432,6 +496,49 @@ public interface QueryrewriterPackage extends EPackage {
 	EReference getConfiguration_ManualGroups();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.sirius.queryrewriter.Configuration#getTags <em>Tags</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Tags</em>'.
+	 * @see org.eclipse.sirius.queryrewriter.Configuration#getTags()
+	 * @see #getConfiguration()
+	 * @generated
+	 */
+	EReference getConfiguration_Tags();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.sirius.queryrewriter.Tag <em>Tag</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Tag</em>'.
+	 * @see org.eclipse.sirius.queryrewriter.Tag
+	 * @generated
+	 */
+	EClass getTag();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.sirius.queryrewriter.Tag#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.eclipse.sirius.queryrewriter.Tag#getName()
+	 * @see #getTag()
+	 * @generated
+	 */
+	EAttribute getTag_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.sirius.queryrewriter.Tag#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see org.eclipse.sirius.queryrewriter.Tag#getDescription()
+	 * @see #getTag()
+	 * @generated
+	 */
+	EAttribute getTag_Description();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.sirius.queryrewriter.Rewrite <em>Rewrite</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -495,6 +602,17 @@ public interface QueryrewriterPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getRewrite_Tested();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.sirius.queryrewriter.Rewrite#getTags <em>Tags</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Tags</em>'.
+	 * @see org.eclipse.sirius.queryrewriter.Rewrite#getTags()
+	 * @see #getRewrite()
+	 * @generated
+	 */
+	EReference getRewrite_Tags();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.sirius.queryrewriter.Occurrence <em>Occurrence</em>}'.
@@ -668,6 +786,40 @@ public interface QueryrewriterPackage extends EPackage {
 		EReference CONFIGURATION__MANUAL_GROUPS = eINSTANCE.getConfiguration_ManualGroups();
 
 		/**
+		 * The meta object literal for the '<em><b>Tags</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONFIGURATION__TAGS = eINSTANCE.getConfiguration_Tags();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.sirius.queryrewriter.impl.TagImpl <em>Tag</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.sirius.queryrewriter.impl.TagImpl
+		 * @see org.eclipse.sirius.queryrewriter.impl.QueryrewriterPackageImpl#getTag()
+		 * @generated
+		 */
+		EClass TAG = eINSTANCE.getTag();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TAG__NAME = eINSTANCE.getTag_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TAG__DESCRIPTION = eINSTANCE.getTag_Description();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.sirius.queryrewriter.impl.RewriteImpl <em>Rewrite</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -716,6 +868,14 @@ public interface QueryrewriterPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute REWRITE__TESTED = eINSTANCE.getRewrite_Tested();
+
+		/**
+		 * The meta object literal for the '<em><b>Tags</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference REWRITE__TAGS = eINSTANCE.getRewrite_Tags();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.sirius.queryrewriter.impl.OccurrenceImpl <em>Occurrence</em>}' class.

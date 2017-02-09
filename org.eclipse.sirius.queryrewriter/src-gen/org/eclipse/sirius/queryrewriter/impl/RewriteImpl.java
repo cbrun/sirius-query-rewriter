@@ -16,11 +16,13 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.sirius.queryrewriter.Occurrence;
 import org.eclipse.sirius.queryrewriter.QueryrewriterPackage;
 import org.eclipse.sirius.queryrewriter.Rewrite;
+import org.eclipse.sirius.queryrewriter.Tag;
 
 /**
  * <!-- begin-user-doc -->
@@ -35,6 +37,7 @@ import org.eclipse.sirius.queryrewriter.Rewrite;
  *   <li>{@link org.eclipse.sirius.queryrewriter.impl.RewriteImpl#getOccurrences <em>Occurrences</em>}</li>
  *   <li>{@link org.eclipse.sirius.queryrewriter.impl.RewriteImpl#isUnderInspection <em>Under Inspection</em>}</li>
  *   <li>{@link org.eclipse.sirius.queryrewriter.impl.RewriteImpl#isTested <em>Tested</em>}</li>
+ *   <li>{@link org.eclipse.sirius.queryrewriter.impl.RewriteImpl#getTags <em>Tags</em>}</li>
  * </ul>
  *
  * @generated
@@ -98,7 +101,7 @@ public class RewriteImpl extends MinimalEObjectImpl.Container implements Rewrite
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean UNDER_INSPECTION_EDEFAULT = false;
+	protected static final boolean UNDER_INSPECTION_EDEFAULT = false; // TODO The default value literal "" is not valid.
 
 	/**
 	 * The cached value of the '{@link #isUnderInspection() <em>Under Inspection</em>}' attribute.
@@ -129,6 +132,16 @@ public class RewriteImpl extends MinimalEObjectImpl.Container implements Rewrite
 	 * @ordered
 	 */
 	protected boolean tested = TESTED_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getTags() <em>Tags</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTags()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Tag> tags;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -250,6 +263,18 @@ public class RewriteImpl extends MinimalEObjectImpl.Container implements Rewrite
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Tag> getTags() {
+		if (tags == null) {
+			tags = new EObjectResolvingEList<Tag>(Tag.class, this, QueryrewriterPackage.REWRITE__TAGS);
+		}
+		return tags;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -277,6 +302,8 @@ public class RewriteImpl extends MinimalEObjectImpl.Container implements Rewrite
 				return isUnderInspection();
 			case QueryrewriterPackage.REWRITE__TESTED:
 				return isTested();
+			case QueryrewriterPackage.REWRITE__TAGS:
+				return getTags();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -306,6 +333,10 @@ public class RewriteImpl extends MinimalEObjectImpl.Container implements Rewrite
 			case QueryrewriterPackage.REWRITE__TESTED:
 				setTested((Boolean)newValue);
 				return;
+			case QueryrewriterPackage.REWRITE__TAGS:
+				getTags().clear();
+				getTags().addAll((Collection<? extends Tag>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -333,6 +364,9 @@ public class RewriteImpl extends MinimalEObjectImpl.Container implements Rewrite
 			case QueryrewriterPackage.REWRITE__TESTED:
 				setTested(TESTED_EDEFAULT);
 				return;
+			case QueryrewriterPackage.REWRITE__TAGS:
+				getTags().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -355,6 +389,8 @@ public class RewriteImpl extends MinimalEObjectImpl.Container implements Rewrite
 				return underInspection != UNDER_INSPECTION_EDEFAULT;
 			case QueryrewriterPackage.REWRITE__TESTED:
 				return tested != TESTED_EDEFAULT;
+			case QueryrewriterPackage.REWRITE__TAGS:
+				return tags != null && !tags.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

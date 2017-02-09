@@ -219,6 +219,7 @@ public class ConfigurationItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(QueryrewriterPackage.Literals.CONFIGURATION__REWRITES);
 			childrenFeatures.add(QueryrewriterPackage.Literals.CONFIGURATION__NAME_REWRITES);
+			childrenFeatures.add(QueryrewriterPackage.Literals.CONFIGURATION__TAGS);
 		}
 		return childrenFeatures;
 	}
@@ -291,6 +292,7 @@ public class ConfigurationItemProvider
 				return;
 			case QueryrewriterPackage.CONFIGURATION__REWRITES:
 			case QueryrewriterPackage.CONFIGURATION__NAME_REWRITES:
+			case QueryrewriterPackage.CONFIGURATION__TAGS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -317,6 +319,11 @@ public class ConfigurationItemProvider
 			(createChildParameter
 				(QueryrewriterPackage.Literals.CONFIGURATION__NAME_REWRITES,
 				 QueryrewriterFactory.eINSTANCE.createNameRewrite()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(QueryrewriterPackage.Literals.CONFIGURATION__TAGS,
+				 QueryrewriterFactory.eINSTANCE.createTag()));
 	}
 
 	/**

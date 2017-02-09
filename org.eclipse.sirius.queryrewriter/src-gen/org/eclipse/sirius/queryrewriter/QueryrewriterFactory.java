@@ -31,6 +31,15 @@ public interface QueryrewriterFactory extends EFactory {
 	Configuration createConfiguration();
 
 	/**
+	 * Returns a new object of class '<em>Tag</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Tag</em>'.
+	 * @generated
+	 */
+	Tag createTag();
+
+	/**
 	 * Returns a new object of class '<em>Rewrite</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

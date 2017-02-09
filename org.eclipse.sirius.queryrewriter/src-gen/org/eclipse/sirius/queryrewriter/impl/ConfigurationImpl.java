@@ -26,6 +26,7 @@ import org.eclipse.sirius.queryrewriter.QueryLanguage;
 import org.eclipse.sirius.queryrewriter.QueryrewriterPackage;
 import org.eclipse.sirius.queryrewriter.Rewrite;
 
+import org.eclipse.sirius.queryrewriter.Tag;
 import org.eclipse.sirius.viewpoint.description.Group;
 
 /**
@@ -44,6 +45,7 @@ import org.eclipse.sirius.viewpoint.description.Group;
  *   <li>{@link org.eclipse.sirius.queryrewriter.impl.ConfigurationImpl#getIncludedConfigurations <em>Included Configurations</em>}</li>
  *   <li>{@link org.eclipse.sirius.queryrewriter.impl.ConfigurationImpl#getNameRewrites <em>Name Rewrites</em>}</li>
  *   <li>{@link org.eclipse.sirius.queryrewriter.impl.ConfigurationImpl#getManualGroups <em>Manual Groups</em>}</li>
+ *   <li>{@link org.eclipse.sirius.queryrewriter.impl.ConfigurationImpl#getTags <em>Tags</em>}</li>
  * </ul>
  *
  * @generated
@@ -138,6 +140,16 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	 * @ordered
 	 */
 	protected EList<Group> manualGroups;
+
+	/**
+	 * The cached value of the '{@link #getTags() <em>Tags</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTags()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Tag> tags;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -268,6 +280,18 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Tag> getTags() {
+		if (tags == null) {
+			tags = new EObjectContainmentEList<Tag>(Tag.class, this, QueryrewriterPackage.CONFIGURATION__TAGS);
+		}
+		return tags;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -275,6 +299,8 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 				return ((InternalEList<?>)getRewrites()).basicRemove(otherEnd, msgs);
 			case QueryrewriterPackage.CONFIGURATION__NAME_REWRITES:
 				return ((InternalEList<?>)getNameRewrites()).basicRemove(otherEnd, msgs);
+			case QueryrewriterPackage.CONFIGURATION__TAGS:
+				return ((InternalEList<?>)getTags()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -303,6 +329,8 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 				return getNameRewrites();
 			case QueryrewriterPackage.CONFIGURATION__MANUAL_GROUPS:
 				return getManualGroups();
+			case QueryrewriterPackage.CONFIGURATION__TAGS:
+				return getTags();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -347,6 +375,10 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 				getManualGroups().clear();
 				getManualGroups().addAll((Collection<? extends Group>)newValue);
 				return;
+			case QueryrewriterPackage.CONFIGURATION__TAGS:
+				getTags().clear();
+				getTags().addAll((Collection<? extends Tag>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -383,6 +415,9 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 			case QueryrewriterPackage.CONFIGURATION__MANUAL_GROUPS:
 				getManualGroups().clear();
 				return;
+			case QueryrewriterPackage.CONFIGURATION__TAGS:
+				getTags().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -411,6 +446,8 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 				return nameRewrites != null && !nameRewrites.isEmpty();
 			case QueryrewriterPackage.CONFIGURATION__MANUAL_GROUPS:
 				return manualGroups != null && !manualGroups.isEmpty();
+			case QueryrewriterPackage.CONFIGURATION__TAGS:
+				return tags != null && !tags.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -216,7 +216,7 @@ public class RewriterServices {
 									exprToMigrates++;
 									Rewrite rewrite = getOrCreateRewrite(conf, expression);
 									String uri = EcoreUtil.getURI(vsmElement).toString();
-									if (uri.contains("Logical%20Architecture")) {
+									if (uri.contains("Logical%20Data%20Flow%20Blank")) {
 										rewrite.setUnderInspection(true);
 									}
 									addOccurrence(rewrite, attr, vsmElement);
@@ -342,7 +342,13 @@ public class RewriterServices {
 			 */
 			body = "self." + body;
 		}
+		/*
+		 * Capella
+		 */
 		body = body.replace("\"AbstractFunction\"", "fa::AbstractFunction");
+		body = body.replace("\"PhysicalPort\"", "cs::PhysicalPort");
+		body = body.replace("\"Scenario\"", "interaction::Scenario");
+		body = body.replace("\"BlockArchitecture\"", "cs::BlockArchitecture");
 		
 		body = body.replace("&&", " and ");
 		body = body.replace("||", " or ");
@@ -421,11 +427,7 @@ public class RewriterServices {
 		body = body.replace("DNode", "diagram::DNode");
 		body = body.replace("DDiagram", "diagram::DDiagram");
 		body = body.replace("Interaction", "interactions::Interaction");
-		/*
-		 * Capella
-		 */
-		body = body.replace("Scenario", "interaction::Scenario");
-		body = body.replace("BlockArchitecture", "cs::BlockArchitecture");
+	
 
 
 		// happens often in Capella
